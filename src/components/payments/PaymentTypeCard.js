@@ -1,0 +1,1 @@
+//card with delete option for each payment type
