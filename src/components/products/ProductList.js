@@ -1,0 +1,1 @@
+// populates list of products after search
