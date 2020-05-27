@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from 'react-router-dom';
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import MyAccount from './customers/MyAccount';
 
 
 const ApplicationViews = (props) => {
@@ -21,10 +22,13 @@ const ApplicationViews = (props) => {
             return <p>My Shopping Cart</p>
         }}/>
         <Route path="/myaccount" render={props => {
-            return <p>My Account</p>
+            return <MyAccount {...props}/>
+        }}/>
+        <Route path="/paymenttypes" render={props => {
+            return <p>Payment Types</p>
         }}/>
         <Route path="/login" render={props => {
-             return <Login {...props}/>
+            return <Login {...props}/>
         }}/>
         <Route path="/register" render={props => {
             return <Register {...props}/>
