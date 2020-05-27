@@ -25,6 +25,7 @@ const PaymentTypeList = (props) => {
     return (
         <div>
             <h1>Saved Payment Types:</h1>
+            <button type="button" onClick={ () => props.history.push("/paymenttypeform")}>Add Payment Type</button>
             <div>
                 {paymentTypes.map(paymentType =>
                     <PaymentTypeCard

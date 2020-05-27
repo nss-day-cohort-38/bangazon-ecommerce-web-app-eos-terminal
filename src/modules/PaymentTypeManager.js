@@ -10,6 +10,17 @@ const PaymentTypeManager = {
             }
         })
         .then(resp => resp.json())
+    },
+    createPaymentType(newPaymentType) {
+        return fetch(paymentTypesApiUrl, {
+            "method": "POST",
+            "headers": {
+                "Content-Type": "application/json",
+                "Accept": "application/json",
+                "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+            },
+            "body": JSON.stringify(newPaymentType)
+        })
     }
 };
 

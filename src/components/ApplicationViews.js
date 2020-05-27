@@ -4,6 +4,7 @@ import Login from "./auth/Login"
 import Register from "./auth/Register"
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
+import PaymentTypeForm from './payments/PaymentTypeForm'
 
 
 const ApplicationViews = (props) => {
@@ -27,6 +28,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/paymenttypes" render={props => {
             return <PaymentTypeList {...props}/>
+        }}/>
+        <Route path="/paymenttypeform" render={props => {
+            return <PaymentTypeForm {...props}/>
         }}/>
         <Route path="/login" render={props => {
             return <Login {...props}/>
