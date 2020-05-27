@@ -11,6 +11,7 @@ const PaymentTypeCard = (props) => {
             <p>Card: {props.paymentType.merchant_name}</p>
             <p>Account Number: Ends in {accountNumber} </p>
             <p>Expiration Date: {expirationDate}</p>
+            <button type="button" onClick={() => { props.deletePaymentType(props.paymentType.id) }}>Delete</button>
         </div>
     );
 }

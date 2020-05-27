@@ -18,6 +18,13 @@ const PaymentTypeList = (props) => {
         }
     };
 
+    const deletePaymentType = (paymentTypeId) => {
+        if (window.confirm("Are you sure you want to delete this payment type?")) {
+            PaymentTypeManager.deletePaymentType(paymentTypeId)
+                .then(getPaymentTypes)
+        }
+    }
+
     useEffect(() => {
         getPaymentTypes();
     }, []);
@@ -31,6 +38,7 @@ const PaymentTypeList = (props) => {
                     <PaymentTypeCard
                         key={paymentType.id}
                         paymentType={paymentType}
+                        deletePaymentType={deletePaymentType}
                         { ...props }
                     />
                 )}

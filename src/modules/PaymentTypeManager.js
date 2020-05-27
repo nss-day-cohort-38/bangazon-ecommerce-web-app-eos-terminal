@@ -21,6 +21,14 @@ const PaymentTypeManager = {
             },
             "body": JSON.stringify(newPaymentType)
         })
+    },
+    deletePaymentType(paymentTypeId) {
+        return fetch(`${paymentTypesApiUrl}/${paymentTypeId}`, {
+            "method": "DELETE",
+            "headers": {
+                "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+            }
+        })
     }
 };
 
