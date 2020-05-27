@@ -3,6 +3,7 @@ import { Route } from 'react-router-dom';
 import Login from "./auth/Login"
 import Register from "./auth/Register"
 import MyAccount from './customers/MyAccount';
+import PaymentTypeList from './customers/Settings';
 
 
 const ApplicationViews = (props) => {
@@ -25,7 +26,7 @@ const ApplicationViews = (props) => {
             return <MyAccount {...props}/>
         }}/>
         <Route path="/paymenttypes" render={props => {
-            return <p>Payment Types</p>
+            return <PaymentTypeList {...props}/>
         }}/>
         <Route path="/login" render={props => {
             return <Login {...props}/>

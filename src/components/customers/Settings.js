@@ -1,6 +1,6 @@
 //affordances to add and delete payment type
 
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import PaymentTypeCard from '../payments/PaymentTypeCard';
 import PaymentTypeManager from '../../modules/PaymentTypeManager';
 import useSimpleAuth from '../auth/useSimpleAuth';

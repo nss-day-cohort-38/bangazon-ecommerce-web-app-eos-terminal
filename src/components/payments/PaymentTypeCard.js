@@ -11,3 +11,5 @@ const PaymentTypeCard = (props) => {
         </div>
     );
 }
+
+export default PaymentTypeCard;
