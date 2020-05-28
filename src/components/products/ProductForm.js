@@ -6,7 +6,7 @@ import './ProductForm.css'
 const ProductForm = props => {
   const [newProduct, setNewProduct] = useState({ title: "", price: 0.01, description: "", quantity: 1, location: "", image: "", productTypeId: 0 });
   const [productTypes, setProductTypes] = useState([]);
-  const [toDisplay, setToDisplay] = useState(true);
+  const [toDisplay, setToDisplay] = useState(false);
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...newProduct };
@@ -101,13 +101,13 @@ const ProductForm = props => {
       </fieldset>
       <fieldset>
         <label> Local Delivery Available? </label>
-        <label><input onClick={() => setToDisplay(true)} type="radio" name="deliveryOption" value="no" defaultChecked /> No </label>
-        <label><input onClick={() => setToDisplay(false)} type="radio" name="deliveryOption" value="yes" /> Yes </label>
-        <div style={{display:  toDisplay ? 'none' : ''}} >
+        <label><input onClick={() => setToDisplay(false)} type="radio" name="deliveryOption" value="no" defaultChecked /> No </label>
+        <label><input onClick={() => setToDisplay(true)} type="radio" name="deliveryOption" value="yes" /> Yes </label>
+        <div style={{display:  toDisplay ? '' : 'none'}} >
         <label htmlFor="location"> Location </label>
         <input onChange={handleFieldChange} type="text"
           id="location"
-          required="" autoFocus="" value={newProduct.location} />
+          required={toDisplay} autoFocus="" value={newProduct.location} />
         </div>
       </fieldset>
       <fieldset>
