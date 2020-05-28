@@ -1,14 +1,18 @@
 import React from "react";
 import { Route } from 'react-router-dom';
-import Login from "./auth/Login";
-import Register from "./auth/Register";
-import ProductForm from "./products/ProductForm";
+import Login from "./auth/Login"
+import Register from "./auth/Register"
+import OrderList from "./orders/Orders";
+import NewOrderForm from "./orders/NewOrderForm"
+import OrderDetail from "./orders/OrderDetails"
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
 import SearchResults from "./search/Results"
+import CompleteOrderForm from "./orders/CompleteOrderForm"
+import ProductDetail from './products/ProductDetails';
+import ProductForm from "./products/ProductForm";
 import ProductTypeList from "./products/ProductTypeList"
-import ProductDetail from "./products/ProductDetails"
 
 
 const ApplicationViews = (props) => {
@@ -27,9 +31,32 @@ const ApplicationViews = (props) => {
         <Route path="/categories" render={props => {
             return <ProductTypeList {...props}/>
         }}/>
-        <Route path="/cart" render={props => {
-            return <p>My Shopping Cart</p>
+        <Route exact path="/order" render={props => {
+            return <OrderList {...props}/>
         }}/>
+
+        <Route
+        path="/neworder" render={props => {
+          return <NewOrderForm {...props} />;
+        }}
+      />
+
+        <Route
+        exact
+        path="/order/:orderId(\d+)"
+        render={props => {
+            return <OrderDetail orderId={parseInt(props.match.params.orderId)}
+                {...props}/>
+        }}
+        />
+
+        <Route
+        path="/order/:orderId(\d+)/edit"
+        render={props => {
+            return <CompleteOrderForm {...props} />;
+          }}
+      />
+
         <Route path="/myaccount" render={props => {
             return <MyAccount {...props}/>
         }}/>
