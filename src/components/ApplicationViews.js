@@ -9,6 +9,7 @@ import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
 import SearchResults from "./search/results"
+import CompleteOrderForm from "./orders/CompleteOrderForm"
 
 
 const ApplicationViews = (props) => {
@@ -42,6 +43,13 @@ const ApplicationViews = (props) => {
                 {...props}/>
         }}
         />
+
+        <Route
+        path="/order/:orderId(\d+)/edit"
+        render={props => {
+            return <CompleteOrderForm {...props} />;
+          }}
+      />
 
         <Route path="/myaccount" render={props => {
             return <MyAccount {...props}/>

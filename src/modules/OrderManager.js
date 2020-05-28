@@ -24,19 +24,23 @@ export default {
       },
       body: JSON.stringify(newOrder)
     }).then(data => data.json());
+  },
+  update(editedOrder) {
+    return fetch(`${remoteURL}/order/${editedOrder.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
+      },
+      body: JSON.stringify(editedOrder)
+    })
+  },
+  delete(id) {
+    return fetch(`${remoteURL}/order/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
+      },
+    })
   }
-//   update(editedOrder) {
-//     return fetch(`${remoteURL}/order/${editedOrder.id}`, {
-//       method: "PUT",
-//       headers: {
-//         "Content-Type": "application/json"
-//       },
-//       body: JSON.stringify(editedOrder)
-//     }).then(data => data.json());
-//   },
-//   delete(id) {
-//     return fetch(`${remoteURL}/order/${id}`, {
-//       method: "DELETE"
-//     }).then(result => result.json());
-//   },
 };
