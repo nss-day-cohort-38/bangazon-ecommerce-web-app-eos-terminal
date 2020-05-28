@@ -8,7 +8,7 @@ const ProductDetail = (props) => {
         ProductManager.getProductById(props.productId).then(product => {
             setProduct({
                 title: product.title,
-                price: product.price,
+                price: product.price.toFixed(2),
                 description: product.description,
                 quantity: product.quantity,
                 location: product.location,
@@ -35,7 +35,7 @@ const ProductDetail = (props) => {
             </picture> */}
             <p>Title: {product.title}</p>
             <p>Product Type: {productType}</p>
-            <p>Price: {product.price}</p>
+            <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
             <p>Location: {product.location}</p>
             <p>Quantity: {product.quantity}</p>
