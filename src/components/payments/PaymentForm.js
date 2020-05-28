@@ -1,1 +1,0 @@
-// form for customer to add new payment type
