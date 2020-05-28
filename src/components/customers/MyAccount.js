@@ -4,7 +4,10 @@ import React from 'react';
 
 const MyAccount = (props) => {
     return (
-        <button type="button" onClick={() => { props.history.push("/paymenttypes") }}>Manage Payment Options</button>
+        <div>
+            <h1>My Account:</h1>
+            <button type="button" onClick={() => { props.history.push("/paymenttypes") }}>Manage Payment Options</button>
+        </div>
     );
 }
 

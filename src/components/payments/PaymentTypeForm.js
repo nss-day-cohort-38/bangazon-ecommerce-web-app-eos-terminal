@@ -41,6 +41,7 @@ const PaymentTypeForm = (props) => {
                 <input onChange={handleFieldChange} type="date" id="expirationDate" required="" autoFocus="" />
             </fieldset>
             <button type="submit">Add</button>
+            <button type="button" onClick={() => props.history.push("/paymenttypes")}>Cancel</button>
         </form>
     )
 };

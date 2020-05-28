@@ -31,6 +31,7 @@ const PaymentTypeList = (props) => {
 
     return (
         <div>
+            <button type="button" onClick={() => props.history.push("/myaccount")}>Go Back to My Account</button>
             <h1>Saved Payment Types:</h1>
             <button type="button" onClick={ () => props.history.push("/paymenttypeform")}>Add Payment Type</button>
             <div>
