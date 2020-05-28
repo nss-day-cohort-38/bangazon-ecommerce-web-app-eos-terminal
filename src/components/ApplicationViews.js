@@ -2,6 +2,9 @@ import React from "react";
 import { Route } from 'react-router-dom';
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import OrderList from "./orders/Orders";
+import NewOrderForm from "./orders/NewOrderForm"
+import OrderDetail from "./orders/OrderDetails"
 
 
 const ApplicationViews = (props) => {
@@ -17,9 +20,25 @@ const ApplicationViews = (props) => {
         <Route path="/categories" render={props => {
             return <p>Product Categories</p>
         }}/>
-        <Route path="/cart" render={props => {
-            return <p>My Shopping Cart</p>
+        <Route exact path="/order" render={props => {
+            return <OrderList {...props}/>
         }}/>
+
+        <Route
+        path="/neworder" render={props => {
+          return <NewOrderForm {...props} />;
+        }}
+      />
+
+        <Route
+        exact
+        path="/order/:orderId(\d+)"
+        render={props => {
+            return <OrderDetail orderId={parseInt(props.match.params.orderId)}
+                {...props}/>
+        }}
+        />
+
         <Route path="/myaccount" render={props => {
             return <p>My Account</p>
         }}/>

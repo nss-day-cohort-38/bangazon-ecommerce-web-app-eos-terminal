@@ -21,7 +21,7 @@ const NavBar = (props) => {
            <> <Link to='/addproduct'>
                 Sell a Product
             </Link>
-            <Link to='/cart'>
+            <Link to='/order'>
                 View Cart
             </Link>
             <Link to='/myaccount'>
