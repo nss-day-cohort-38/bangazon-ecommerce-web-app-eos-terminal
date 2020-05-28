@@ -12,6 +12,7 @@ import SearchResults from "./search/Results"
 import CompleteOrderForm from "./orders/CompleteOrderForm"
 import ProductDetail from './products/ProductDetails';
 import ProductForm from "./products/ProductForm";
+import ProductTypeList from "./products/ProductTypeList"
 
 
 const ApplicationViews = (props) => {
