@@ -10,3 +10,13 @@ h3 {
 a:hover {
     text-decoration:underline ;
 }
+
+
+li {
+    list-style: none;
+}
+
+ul {
+    text-align: center;
+    padding: 0px 20px 0px 20px !important;
+}
