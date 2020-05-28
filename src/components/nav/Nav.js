@@ -39,7 +39,7 @@ const NavBar = (props) => {
               onChange={handleFieldChange}
               type="text"
               id="searchBar"
-              placeholder="Search for products"
+              placeholder="Search for product/location"
               autoFocus=""
             />
             </form>
