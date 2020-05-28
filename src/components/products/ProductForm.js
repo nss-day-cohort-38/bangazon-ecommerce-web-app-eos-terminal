@@ -45,7 +45,7 @@ const ProductForm = props => {
     }
     else{
         ProductManager.addProduct(newProductObj)
-        .then(() => props.history.push("/ "))
+        .then((response) => props.history.push(`/products/${response.id}`))
     }
     }
 
