@@ -5,8 +5,9 @@ import Register from "./auth/Register";
 import ProductForm from "./products/ProductForm";
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
-import PaymentTypeForm from './payments/PaymentTypeForm'
-import SearchResults from "./search/results"
+import PaymentTypeForm from './payments/PaymentTypeForm';
+import SearchResults from "./search/results";
+import ProductDetail from './products/ProductDetails';
 
 
 const ApplicationViews = (props) => {
@@ -42,6 +43,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/results" render={props => {
             return <SearchResults {...props}/>
+        }}/>
+        <Route path="/products/:productId(\d+)" render={props => {
+            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
         }}/>
         </>
     )

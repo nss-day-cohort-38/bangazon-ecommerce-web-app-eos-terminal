@@ -4,7 +4,7 @@ import ProductManager from "../../modules/ProductManager"
 
 
 const ProductForm = props => {
-  const [newProduct, setNewProduct] = useState({ title: "", price: 0.00, description: "", quantity: 1, location: "", image: "", productTypeId: 0 });
+  const [newProduct, setNewProduct] = useState({ title: "", price: 0.01, description: "", quantity: 1, location: "", image: "", productTypeId: 0 });
   const [productTypes, setProductTypes] = useState([]);
 
   const handleFieldChange = (evt) => {
@@ -16,18 +16,37 @@ const ProductForm = props => {
   const handleSubmit = e => {
     e.preventDefault();
 
-    const newProductObj = {
-      "title": Number(newProduct.title),
-      "price": Number(newProduct.price),
-      "description": Number(newProduct.description),
-      "quantity": Number(newProduct.quantity),
-      "location": Number(newProduct.location),
-      "image": Number(newProduct.image),
-      "product_type_id": Number(newProduct.product_type_id)
+    let location = newProduct.location
+    let image = newProduct.image
+
+    if(newProduct.location == ""){
+        location = null
     }
 
-    ProductManager.addProduct(newProductObj)
+    if(newProduct.image == ""){
+        image = null
+    }
+
+    const newProductObj = {
+      "title": newProduct.title,
+      "price": Number(newProduct.price),
+      "description": newProduct.description,
+      "quantity": Number(newProduct.quantity),
+      "location": location,
+      "image": image,
+      "product_type_id": Number(newProduct.productTypeId)
+    }
+
+    if(newProduct.price == 0.01){
+        if(window.confirm("Are you sure you want to sell this item for $0.01?")){
+            ProductManager.addProduct(newProductObj)
+            .then((response) => props.history.push(`/products/${response.id}`))
+        }
+    }
+    else{
+        ProductManager.addProduct(newProductObj)
         .then(() => props.history.push("/ "))
+    }
     }
 
   useEffect(() => {
@@ -45,8 +64,9 @@ const ProductForm = props => {
         <select
           className="form-control"
           id="productTypeId"
-          value={newProduct.productTypeId}
+          required
           onChange={handleFieldChange}>
+        <option value="">Select Type</option>
           {productTypes.map(productType =>
             <option key={productType.id} value={productType.id}>
               {productType.name}
@@ -58,25 +78,25 @@ const ProductForm = props => {
         <label htmlFor="title"> Name </label>
         <input onChange={handleFieldChange} type="text"
           id="title"
-          required="" autoFocus="" value={newProduct.title} />
+          required autoFocus="" value={newProduct.title} />
       </fieldset>
       <fieldset>
         <label htmlFor="price"> Price </label>
         <input onChange={handleFieldChange} type="number" step="0.01" min="0"
           id="price"
-          required="" autoFocus="" value={newProduct.price} />
+          required autoFocus="" value={newProduct.price} />
       </fieldset>
       <fieldset>
         <label htmlFor="description"> Description </label>
         <textarea onChange={handleFieldChange} type="textarea"
           id="description"
-          required="" autoFocus="" value={newProduct.description} />
+          required autoFocus="" value={newProduct.description} />
       </fieldset>
       <fieldset>
         <label htmlFor="quantity"> Quantity </label>
         <input onChange={handleFieldChange} type="number" min="1"
           id="quantity"
-          required="" autoFocus="" value={newProduct.quantity} />
+          required autoFocus="" value={newProduct.quantity} />
       </fieldset>
       <fieldset>
         <label htmlFor="location"> Location </label>
