@@ -14,8 +14,6 @@ import ProductDetail from './products/ProductDetails';
 import ProductForm from "./products/ProductForm";
 
 
-
-
 const ApplicationViews = (props) => {
 
     return(
@@ -26,8 +24,11 @@ const ApplicationViews = (props) => {
         <Route path="/addproduct" render={props => {
             return <ProductForm { ...props }/>
         }}/>
+        <Route path="/products/:productId(\d+)" render={props => {
+            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
+        }}/>
         <Route path="/categories" render={props => {
-            return <p>Product Categories</p>
+            return <ProductTypeList {...props}/>
         }}/>
         <Route exact path="/order" render={props => {
             return <OrderList {...props}/>
@@ -72,9 +73,6 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/results" render={props => {
             return <SearchResults {...props}/>
-        }}/>
-        <Route path="/products/:productId(\d+)" render={props => {
-            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
         }}/>
         </>
     )
