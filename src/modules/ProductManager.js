@@ -16,5 +16,9 @@ export default {
   getProductTypes() {
     return fetch(`${authApiUrl}/producttypes`)
         .then(response => response.json())
-},
+  },
+  getProductById(productId) {
+    return fetch(`${authApiUrl}/products/${productId}`)
+        .then(resp => resp.json())
+  }
 }
