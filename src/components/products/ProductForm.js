@@ -99,10 +99,15 @@ const ProductForm = props => {
           required autoFocus="" value={newProduct.quantity} />
       </fieldset>
       <fieldset>
+        <label> Local Delivery Available? </label>
+        <label><input type="radio" name="deliveryOption" value="no" defaultChecked /> No </label>
+        <label><input type="radio" name="deliveryOption" value="yes" /> Yes </label>
+        <div className="hidden">
         <label htmlFor="location"> Location </label>
         <input onChange={handleFieldChange} type="text"
           id="location"
           required="" autoFocus="" value={newProduct.location} />
+        </div>
       </fieldset>
       <fieldset>
         <label htmlFor="image"> Image URL </label>
