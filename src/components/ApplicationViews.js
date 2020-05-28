@@ -5,6 +5,7 @@ import Register from "./auth/Register"
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
+import SearchResults from "./search/results"
 
 
 const ApplicationViews = (props) => {
@@ -37,6 +38,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/register" render={props => {
             return <Register {...props}/>
+        }}/>
+        <Route path="/results" render={props => {
+            return <SearchResults {...props}/>
         }}/>
         </>
     )
