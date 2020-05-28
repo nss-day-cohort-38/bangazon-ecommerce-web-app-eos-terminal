@@ -1,11 +1,12 @@
 import React from "react";
 import { Route } from 'react-router-dom';
-import Login from "./auth/Login"
-import Register from "./auth/Register"
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import ProductForm from "./products/ProductForm";
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
-import SearchResults from "./search/results"
+import SearchResults from "./search/Results"
 import ProductTypeList from "./products/ProductTypeList"
 import ProductDetail from "./products/ProductDetails"
 
@@ -18,7 +19,7 @@ const ApplicationViews = (props) => {
             return <p>Home Page</p>
         }}/>
         <Route path="/addproduct" render={props => {
-            return <p>Sell a Product</p>
+            return <ProductForm { ...props }/>
         }}/>
         <Route path="/products/:productId(\d+)" render={props => {
             return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
@@ -46,6 +47,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/results" render={props => {
             return <SearchResults {...props}/>
+        }}/>
+        <Route path="/products/:productId(\d+)" render={props => {
+            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
         }}/>
         </>
     )
