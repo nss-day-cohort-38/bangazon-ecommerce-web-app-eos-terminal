@@ -22,7 +22,7 @@ const OrderList = (props) => {
     getOrders();
   }, []);
 
-  console.log(orders);
+  // console.log(orders);
 
   return (
     <>
