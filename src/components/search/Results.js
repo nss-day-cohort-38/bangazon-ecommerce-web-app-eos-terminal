@@ -34,11 +34,11 @@ const SearchResults = (props) => {
       <>
         <h3>{results.length} product(s) found matching your search</h3>
         {results.map(result => (
-        <li key={result.id}>{result.title}</li>
+        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
           ))}
         <h3>{local.length} product(s) found with location matching your search</h3>
         {local.map(result => (
-        <li key={result.id}>{result.title}</li>
+        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
           ))}
       </>
       )
