@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from 'react-router-dom';
-import Login from "./auth/Login"
-import Register from "./auth/Register"
+import Login from "./auth/Login";
+import Register from "./auth/Register";
+import ProductForm from "./products/ProductForm";
 
 
 const ApplicationViews = (props) => {
@@ -12,7 +13,7 @@ const ApplicationViews = (props) => {
             return <p>Home Page</p>
         }}/>
         <Route path="/addproduct" render={props => {
-            return <p>Sell a Product</p>
+            return <ProductForm { ...props }/>
         }}/>
         <Route path="/categories" render={props => {
             return <p>Product Categories</p>
