@@ -26,6 +26,13 @@ const OrderList = (props) => {
 
   return (
     <>
+    <div>    <button
+          type="button"
+          onClick={() => {
+            props.history.push(`/neworder`);
+          }}
+        >Create new order
+        </button> </div>
       <div className="container-cards">
         {orders.map((order) => (
           <OrderCard key={order.id} order={order} {...props} />
