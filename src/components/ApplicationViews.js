@@ -6,7 +6,7 @@ import ProductForm from "./products/ProductForm";
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm';
-import SearchResults from "./search/results";
+import SearchResults from "./search/Results";
 import ProductDetail from './products/ProductDetails';
 
 
