@@ -22,7 +22,7 @@ const ProductTypeCard = props => {
         
                 <ul>
                     {props.productType.products.map(product =>
-                        <a className="detail-link"onClick={() => props.history.push(`/products/${parseInt(product.url.split('/')[4])}`)}><strong><li>{product.title} ({product.quantity})</li></strong></a>
+                        <a key={parseInt(product.url.split('/')[4])}className="detail-link"onClick={() => props.history.push(`/products/${parseInt(product.url.split('/')[4])}`)}><strong><li key={parseInt(product.url.split('/')[4])}>{product.title} ({product.quantity})</li></strong></a>
                         
                         )
                     }
