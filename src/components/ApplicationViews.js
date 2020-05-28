@@ -5,7 +5,7 @@ import Register from "./auth/Register"
 import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
-import SearchResults from "./search/results"
+import SearchResults from "./search/Results"
 
 
 const ApplicationViews = (props) => {
