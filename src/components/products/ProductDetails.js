@@ -28,7 +28,7 @@ const ProductDetail = (props) => {
     }, [])
     return (
         <div>
-            <button type="button" onClick={() => props.history.push("/products")}>View All Products</button>
+            <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
             <h1>Product Detail:</h1>
             {/* <picture>
                 <img src={require("")} alt="" />
