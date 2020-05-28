@@ -14,21 +14,17 @@ export default {
       },
     }).then((result) => result.json());
   },
-//   delete(id) {
-//     return fetch(`${remoteURL}/order/${id}`, {
-//       method: "DELETE"
-//     }).then(result => result.json());
-//   },
   post(newOrder) {
     return fetch(`${remoteURL}/order`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        "Accept": "application/json",
         Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
       },
       body: JSON.stringify(newOrder)
     }).then(data => data.json());
-  },
+  }
 //   update(editedOrder) {
 //     return fetch(`${remoteURL}/order/${editedOrder.id}`, {
 //       method: "PUT",
@@ -37,5 +33,10 @@ export default {
 //       },
 //       body: JSON.stringify(editedOrder)
 //     }).then(data => data.json());
+//   },
+//   delete(id) {
+//     return fetch(`${remoteURL}/order/${id}`, {
+//       method: "DELETE"
+//     }).then(result => result.json());
 //   },
 };

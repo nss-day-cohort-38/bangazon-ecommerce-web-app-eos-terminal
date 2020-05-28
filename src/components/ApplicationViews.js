@@ -5,6 +5,10 @@ import Register from "./auth/Register"
 import OrderList from "./orders/Orders";
 import NewOrderForm from "./orders/NewOrderForm"
 import OrderDetail from "./orders/OrderDetails"
+import MyAccount from './customers/MyAccount';
+import PaymentTypeList from './customers/Settings';
+import PaymentTypeForm from './payments/PaymentTypeForm'
+import SearchResults from "./search/results"
 
 
 const ApplicationViews = (props) => {
@@ -40,13 +44,22 @@ const ApplicationViews = (props) => {
         />
 
         <Route path="/myaccount" render={props => {
-            return <p>My Account</p>
+            return <MyAccount {...props}/>
+        }}/>
+        <Route path="/paymenttypes" render={props => {
+            return <PaymentTypeList {...props}/>
+        }}/>
+        <Route path="/paymenttypeform" render={props => {
+            return <PaymentTypeForm {...props}/>
         }}/>
         <Route path="/login" render={props => {
-             return <Login {...props}/>
+            return <Login {...props}/>
         }}/>
         <Route path="/register" render={props => {
             return <Register {...props}/>
+        }}/>
+        <Route path="/results" render={props => {
+            return <SearchResults {...props}/>
         }}/>
         </>
     )

@@ -4,9 +4,8 @@ import OrderManager from "../../modules/OrderManager";
 
 const NewOrderForm = props => {
   const [order] = useState({
-    created_at: new Date(),
-    customer_id: 1,
-    payment_type_id: 1,
+    created_at: "",
+    payment_type_id: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
