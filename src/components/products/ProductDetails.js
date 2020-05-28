@@ -4,6 +4,7 @@ import ProductTypeManager from '../../modules/ProductTypeManager';
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
     const [productType, setProductType] = useState("")
+
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
             setProduct({
@@ -25,6 +26,7 @@ const ProductDetail = (props) => {
                 setProductType(filteredProductType)
             })
         })
+        
     }, [])
     return (
         <div>
@@ -37,7 +39,11 @@ const ProductDetail = (props) => {
             <p>Product Type: {productType}</p>
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
-            <p>Location: {product.location}</p>
+            {
+               product.location !== null
+               ? <p>Local Delivery Available In: {product.location}</p>
+               : null
+            }
             <p>Quantity: {product.quantity}</p>
         </div>
     )
