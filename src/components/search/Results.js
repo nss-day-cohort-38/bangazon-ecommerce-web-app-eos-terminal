@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import SearchManager from '../../modules/SearchManager';
+import "./Results.css"
 
 const SearchResults = (props) => {
   const [results, setResults] = useState([]);
@@ -36,7 +37,9 @@ const SearchResults = (props) => {
         {results.map(result => (
           <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
         ))}
+
         <h3>{local.length} product(s) found with location matching your search</h3>
+        
         {local.map(result => (
           <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
         ))}
