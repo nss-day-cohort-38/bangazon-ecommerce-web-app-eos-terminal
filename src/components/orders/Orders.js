@@ -22,8 +22,6 @@ const OrderList = (props) => {
     getOrders();
   }, []);
 
-  // console.log(orders);
-
   return (
     <>
     <div>    <button

@@ -19,7 +19,6 @@ const OrderDetail = props => {
   const handleDelete = () => {
     //invoke the delete function in OrderManger and re-direct to the order list.
     setIsLoading(true);
-    console.log(props.orderId)
     OrderManager.delete(props.orderId).then(() =>
       props.history.push("/order")
     );
@@ -43,7 +42,7 @@ const OrderDetail = props => {
           Complete Order
         </button>
         <button type="button" disabled={isLoading} onClick={handleDelete}>
-          Cancel
+          Cancel Order
         </button>
 
       </div>

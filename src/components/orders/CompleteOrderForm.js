@@ -36,7 +36,6 @@ const CompleteOrderForm = props => {
     OrderManager.get(props.match.params.orderId).then(order => {
       setOrder(order);
       PaymentTypeManager.getPaymentTypesByUser(paymentType).then(payment => {
-          console.log(payment)
         setPaymentType(payment);
       });
       setIsLoading(false);
@@ -52,11 +51,10 @@ const CompleteOrderForm = props => {
             <select
               className="form-control"
               id="payment_type"
-              value={order.payment_type}
               required
               onChange={handleFieldChange}
             >
-              <option value="">Select Type</option>
+              <option value="" disabled defaultValue>Select Type</option>
               {paymentType.map(payment => (
 
                 <option key={payment.id} value={payment.id}>
