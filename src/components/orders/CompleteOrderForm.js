@@ -44,35 +44,29 @@ const CompleteOrderForm = props => {
 
   return (
     <>
-      <form>
+      <form onSubmit={updateExistingOrder}>
         <fieldset>
-          <div className="formgrid">
           <label htmlFor="payment_type">PaymentType: </label>
             <select
               className="form-control"
               id="payment_type"
               required
-              onChange={handleFieldChange}
-            >
-              <option value="" disabled defaultValue>Select Type</option>
+              onChange={handleFieldChange}> 
+             <option value="">Select Type</option>
               {paymentType.map(payment => (
-
-                <option key={payment.id} value={payment.id}>
-                  {payment.merchant_name}
-                </option>
+             <option key={payment.id} value={payment.id}>
+               {payment.merchant_name}
+             </option>
               ))}
             </select>
-          </div>
-          <div className="alignRight">
+          </fieldset>
+          <fieldset>
             <button
-              type="button"
+              type="submit"
               disabled={isLoading}
-              onClick={updateExistingOrder}
-              className="btn btn-primary"
             >
               Done
             </button>
-          </div>
         </fieldset>
       </form>
     </>
