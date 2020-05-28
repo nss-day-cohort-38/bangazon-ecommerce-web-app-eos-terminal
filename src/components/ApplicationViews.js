@@ -7,6 +7,7 @@ import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
 import SearchResults from "./search/results"
 import ProductTypeList from "./products/ProductTypeList"
+import ProductDetail from "./products/ProductDetails"
 
 
 const ApplicationViews = (props) => {
@@ -18,6 +19,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/addproduct" render={props => {
             return <p>Sell a Product</p>
+        }}/>
+        <Route path="/products/:productId(\d+)" render={props => {
+            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
         }}/>
         <Route path="/categories" render={props => {
             return <ProductTypeList {...props}/>

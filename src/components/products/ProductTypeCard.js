@@ -4,14 +4,14 @@ const ProductTypeCard = props => {
 
 
     const productAccumulator = () => {
-    let productAmount = 0
-       props.productType.products.map(product => {
-       productAmount += product.quantity 
-       }) 
-       return productAmount
+        let productAmount = 0
+        props.productType.products.map(product => {
+            productAmount += product.quantity
+        })
+        return productAmount
     }
 
-     const finalProductAmount = productAccumulator()
+    const finalProductAmount = productAccumulator()
 
     return (
         <>
@@ -21,7 +21,9 @@ const ProductTypeCard = props => {
             <p>
                 <ul>
                     {props.productType.products.map(product =>
-                        <li>{product.title} ({product.quantity})</li>)}
+                        <a href="" onClick={() => props.history.push(`/products/${product.url.substr(product.url.length -1)}`)}><li>{product.title} ({product.quantity})</li></a>
+                    )
+                    }
                 </ul>
             </p>
         </>
