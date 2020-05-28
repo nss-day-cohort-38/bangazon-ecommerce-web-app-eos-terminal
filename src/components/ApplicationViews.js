@@ -2,6 +2,7 @@ import React from "react";
 import { Route } from 'react-router-dom';
 import Login from "./auth/Login"
 import Register from "./auth/Register"
+import SearchResults from "./search/results"
 
 
 const ApplicationViews = (props) => {
@@ -28,6 +29,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/register" render={props => {
             return <Register {...props}/>
+        }}/>
+        <Route path="/results" render={props => {
+            return <SearchResults {...props}/>
         }}/>
         </>
     )
