@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import "./ProductType.css"
 
 const ProductTypeCard = props => {
 
@@ -17,15 +18,17 @@ const ProductTypeCard = props => {
         <>
             <div>
                 <h3>{props.productType.name} ({finalProductAmount})</h3>
-            </div>
+            
             <p>
                 <ul>
                     {props.productType.products.map(product =>
-                        <a href="" onClick={() => props.history.push(`/products/${product.url.substr(product.url.length -1)}`)}><li>{product.title} ({product.quantity})</li></a>
-                    )
+                        <a className="detail-link"onClick={() => props.history.push(`/products/${parseInt(product.url.split('/')[4])}`)}><li>{product.title} ({product.quantity})</li></a>
+                        
+                        )
                     }
                 </ul>
             </p>
+            </div>
         </>
     )
 }

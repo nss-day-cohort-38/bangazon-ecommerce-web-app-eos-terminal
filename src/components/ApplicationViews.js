@@ -48,9 +48,6 @@ const ApplicationViews = (props) => {
         <Route path="/results" render={props => {
             return <SearchResults {...props}/>
         }}/>
-        <Route path="/products/:productId(\d+)" render={props => {
-            return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
-        }}/>
         </>
     )
 }

@@ -16,8 +16,8 @@ const ProductTypeList = (props) => {
     }, []);
 
     return (
-        <>
-            <div>
+        <><div>
+            <div className="container-cards">
                 {productTypes.map(productType =>
                     <ProductTypeCard
                         key={productType.id}
@@ -25,6 +25,7 @@ const ProductTypeList = (props) => {
                         {...props}
                     />
                 )}
+            </div>
             </div>
         </>
 
