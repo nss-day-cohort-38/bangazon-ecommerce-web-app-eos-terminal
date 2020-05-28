@@ -35,9 +35,17 @@ const OrderDetail = props => {
         <h3>
           Created At: <span style={{ color: "darkslategrey" }}>{order.created_at}</span>
         </h3>
-        <button type="button" disabled={isLoading} onClick={handleDelete}>
-          Delete
+
+        <button
+          type="button"
+          onClick={() => props.history.push(`/order/${props.orderId}/edit`)}
+        >
+          Complete Order
         </button>
+        <button type="button" disabled={isLoading} onClick={handleDelete}>
+          Cancel
+        </button>
+
       </div>
     </div>
   );

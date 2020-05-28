@@ -5,10 +5,9 @@ import PaymentTypeManager from "../../modules/PaymentTypeManager";
 
 const CompleteOrderForm = props => {
   const [order, setOrder] = useState({
-
     payment_type: ""
   });
-  const [PaymentType, setPaymentType] = useState([]);
+  const [paymentType, setPaymentType] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleFieldChange = evt => {
@@ -28,6 +27,7 @@ const CompleteOrderForm = props => {
     };
 
     OrderManager.update(editedOrder).then(() =>
+    alert("Your order is now complete.")).then(() =>
       props.history.push("/order")
     );
   };
@@ -35,7 +35,7 @@ const CompleteOrderForm = props => {
   useEffect(() => {
     OrderManager.get(props.match.params.orderId).then(order => {
       setOrder(order);
-      PaymentTypeManager.getPaymentTypesByUser(PaymentType).then(payment => {
+      PaymentTypeManager.getPaymentTypesByUser(paymentType).then(payment => {
           console.log(payment)
         setPaymentType(payment);
       });
@@ -48,21 +48,22 @@ const CompleteOrderForm = props => {
       <form>
         <fieldset>
           <div className="formgrid">
-
-
+          <label htmlFor="payment_type">PaymentType: </label>
             <select
               className="form-control"
               id="payment_type"
               value={order.payment_type}
+              required
               onChange={handleFieldChange}
             >
-              {PaymentType.map(payment => (
+              <option value="">Select Type</option>
+              {paymentType.map(payment => (
+
                 <option key={payment.id} value={payment.id}>
                   {payment.merchant_name}
                 </option>
               ))}
             </select>
-            <label htmlFor="payment_type">PaymentType</label>
           </div>
           <div className="alignRight">
             <button
@@ -71,7 +72,7 @@ const CompleteOrderForm = props => {
               onClick={updateExistingOrder}
               className="btn btn-primary"
             >
-              Submit
+              Done
             </button>
           </div>
         </fieldset>
