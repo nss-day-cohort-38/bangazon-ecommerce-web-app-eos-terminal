@@ -6,6 +6,7 @@ import MyAccount from './customers/MyAccount';
 import PaymentTypeList from './customers/Settings';
 import PaymentTypeForm from './payments/PaymentTypeForm'
 import SearchResults from "./search/results"
+import ProductTypeList from "./products/ProductTypeList"
 
 
 const ApplicationViews = (props) => {
@@ -19,7 +20,7 @@ const ApplicationViews = (props) => {
             return <p>Sell a Product</p>
         }}/>
         <Route path="/categories" render={props => {
-            return <p>Product Categories</p>
+            return <ProductTypeList {...props}/>
         }}/>
         <Route path="/cart" render={props => {
             return <p>My Shopping Cart</p>
