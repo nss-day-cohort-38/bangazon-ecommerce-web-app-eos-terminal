@@ -20,7 +20,7 @@ const NewOrderForm = props => {
   };
 
   return (
-    <>
+    <div className="content">
       <form>
         <fieldset>
           <div className="formgrid">
@@ -35,7 +35,7 @@ const NewOrderForm = props => {
           </div>
         </fieldset>
       </form>
-    </>
+    </div>
   );
 };
 

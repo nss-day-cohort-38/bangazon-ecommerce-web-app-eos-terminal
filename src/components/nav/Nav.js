@@ -25,40 +25,49 @@ const NavBar = (props) => {
 
   return (
     <>
-      <nav>
-        <Link to="/ ">Home</Link>
-        <Link to="/categories">Product Categories</Link>
+      <div id="navDiv">
+        <nav>
+          <Link to="/ ">Home</Link>
+          <Link to="/categories">Product Categories</Link>
+          {isAuthenticated() ? (
+            <>
+              {" "}
+              <Link to="/addproduct">Sell a Product</Link>
+              <Link to="/order">View Cart</Link>
+              <Link to="/myaccount">My Account</Link>
+              <Link
+                onClick={() => {
+                  logout();
+                }}
+                to="/ "
+              >
+                Log Out
+              </Link>{" "}
+            </>
+          ) : (
+            <>
+              <Link to="/login">Log In</Link>
+              <Link to="/register">Register</Link>
+            </>
+          )}
+        </nav>
         {isAuthenticated() ? (
-          <>
-            {" "}
-            <Link to="/addproduct">Sell a Product</Link>
-            <Link to="/order">View Cart</Link>
-            <Link to="/myaccount">My Account</Link>
-            <form onSubmit={handleSearch}>
+          <div className="searchBarDiv">
+          <form onSubmit={handleSearch}>
             <input
               onChange={handleFieldChange}
               type="text"
               id="searchBar"
               placeholder="Search for product/location"
-              autoFocus=""
-            />
-            </form>
-            <Link
-              onClick={() => {
-                logout();
-              }}
-              to="/ "
-            >
-              Log Out
-            </Link>{" "}
-          </>
+              // autoFocus=""
+              />
+          </form>
+        </div>
         ) : (
-          <>
-            <Link to="/login">Log In</Link>
-            <Link to="/register">Register</Link>
-          </>
+          <div className="searchBarDiv"></div>
         )}
-      </nav>
+        
+      </div>
     </>
   );
 };

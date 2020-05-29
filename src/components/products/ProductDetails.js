@@ -29,7 +29,7 @@ const ProductDetail = (props) => {
         
     }, [])
     return (
-        <div>
+        <div className="content">
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
             <h1>Product Detail:</h1>
             {/* <picture>

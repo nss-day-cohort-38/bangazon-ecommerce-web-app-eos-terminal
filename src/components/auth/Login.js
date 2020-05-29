@@ -25,6 +25,7 @@ const Login = props => {
   }
 
   return (
+    <div className="content">
     <form className="form--login" onSubmit={handleLogin}>
       <h1 className="h3 mb-3 font-weight-normal">Login to Bangazon!</h1>
       <fieldset>
@@ -47,6 +48,7 @@ const Login = props => {
                     </button>
       </fieldset>
     </form>
+    </div>
   )
 }
 

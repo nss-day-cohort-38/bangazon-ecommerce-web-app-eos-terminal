@@ -26,6 +26,7 @@ const PaymentTypeForm = (props) => {
     }
 
     return (
+        <div className="content">
         <form onSubmit={handleSubmit}>
             <h1>Add New Payment Type</h1>
             <fieldset>
@@ -43,6 +44,7 @@ const PaymentTypeForm = (props) => {
             <button type="submit">Add</button>
             <button type="button" onClick={() => props.history.push("/paymenttypes")}>Cancel</button>
         </form>
+        </div>
     )
 };
 

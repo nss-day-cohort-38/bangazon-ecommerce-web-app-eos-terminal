@@ -58,6 +58,7 @@ const ProductForm = props => {
   }, []);
 
   return (
+    <div className="content">
     <form className="form--login" onSubmit={handleSubmit}>
       <h1 className="h3 mb-3 font-weight-normal">Sell a Product</h1>
       <fieldset>
@@ -120,6 +121,7 @@ const ProductForm = props => {
         <button type="submit">Submit</button>
       </fieldset>
     </form>
+    </div>
   )
 }
 
