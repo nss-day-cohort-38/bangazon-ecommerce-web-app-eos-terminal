@@ -16,7 +16,7 @@ const ProductTypeList = (props) => {
     }, []);
 
     return (
-        <><div>
+        <><div className="content">
             <div className="container-cards">
                 {productTypes.map(productType =>
                     <ProductTypeCard

@@ -19,7 +19,8 @@ const ProductList = (props) => {
     }, []);
 
     return (
-        <><div>
+        <div className="content">
+        <div>
             <h2>{productType.name}</h2>
             <div>
                 {products.map(product => 
@@ -31,7 +32,7 @@ const ProductList = (props) => {
                 />)}
             </div>
             </div>
-        </>
+        </div>
 
     )
 

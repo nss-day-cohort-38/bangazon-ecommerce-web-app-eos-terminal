@@ -43,7 +43,7 @@ const CompleteOrderForm = props => {
   }, []);
 
   return (
-    <>
+    <div className="content">
       <form onSubmit={updateExistingOrder}>
         <fieldset>
           <label htmlFor="payment_type">PaymentType: </label>
@@ -69,7 +69,7 @@ const CompleteOrderForm = props => {
             </button>
         </fieldset>
       </form>
-    </>
+    </div>
   );
 };
 
