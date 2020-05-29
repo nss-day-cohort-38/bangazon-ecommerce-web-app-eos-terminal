@@ -21,7 +21,7 @@ const Login = props => {
     }
 
     login(customerCreds)
-      .then(() => props.history.push("/"))
+      .then(() => props.history.push("/ "))
   }
 
   return (
