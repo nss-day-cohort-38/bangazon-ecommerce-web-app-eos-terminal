@@ -17,11 +17,11 @@ const ProductTypeCard = props => {
     return (
         <>
             <div>
-                <h3>{props.productType.name} ({finalProductAmount})</h3>
+                <a onClick={() => props.history.push(`/categories/${props.productType.id}`)} className="detail-link"><h3>{props.productType.name} ({finalProductAmount})</h3></a>
             
         
                 <ul>
-                    {props.productType.products.map(product =>
+                    {props.productType.products.slice(0, 3).map(product =>
                         <a key={parseInt(product.url.split('/')[4])}className="detail-link"onClick={() => props.history.push(`/products/${parseInt(product.url.split('/')[4])}`)}><strong><li key={parseInt(product.url.split('/')[4])}>{product.title} ({product.quantity})</li></strong></a>
                         
                         )
