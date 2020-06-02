@@ -25,6 +25,7 @@ const OrderDetail = props => {
   };
 
   return (
+    <div className="content">
     <div className="card">
       <div className="card-content">
         <picture></picture>
@@ -46,6 +47,7 @@ const OrderDetail = props => {
         </button>
 
       </div>
+    </div>
     </div>
   );
 };

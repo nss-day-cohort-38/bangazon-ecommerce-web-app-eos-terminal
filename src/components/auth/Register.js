@@ -29,6 +29,7 @@ const Register = props => {
   }
 
   return (
+    <div className="content">
     <form className="form--login" onSubmit={handleRegister}>
       <h1 className="h3 mb-3 font-weight-normal">Register to get started with Bangazon!</h1>
       <fieldset>
@@ -84,6 +85,7 @@ const Register = props => {
                     </button>
       </fieldset>
     </form>
+    </div>
   )
 }
 

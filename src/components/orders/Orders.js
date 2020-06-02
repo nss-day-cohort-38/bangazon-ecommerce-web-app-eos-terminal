@@ -23,7 +23,7 @@ const OrderList = (props) => {
   }, []);
 
   return (
-    <>
+    <div className="content">
     <div>    <button
           type="button"
           onClick={() => {
@@ -36,7 +36,7 @@ const OrderList = (props) => {
           <OrderCard key={order.id} order={order} {...props} />
         ))}
       </div>
-    </>
+    </div>
   );
 };
 export default OrderList;

@@ -30,20 +30,22 @@ const SearchResults = (props) => {
   }, [props.location.state.search]);
 
   return isLoading ? (
-    <p>Generating Search Results...</p>
+    <div className="content">
+      <p>Generating Search Results...</p>
+    </div>
   ) : (
-      <>
-        <h3>{results.length} product(s) found matching your search</h3>
-        {results.map(result => (
-          <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
-        ))}
+    <div className="content">
+      <h3>{results.length} product(s) found matching your search</h3>
+      {results.map(result => (
+        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
+      ))}
 
-        <h3>{local.length} product(s) found with location matching your search</h3>
-        
-        {local.map(result => (
-          <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
-        ))}
-      </>
+      <h3>{local.length} product(s) found with location matching your search</h3>
+      
+      {local.map(result => (
+        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
+      ))}
+    </div>
     )
 }
 
