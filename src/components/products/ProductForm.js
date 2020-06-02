@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react"
 import ProductManager from "../../modules/ProductManager"
 import './ProductForm.css'
+import axios from 'axios'
 
 const ProductForm = props => {
   const [newProduct, setNewProduct] = useState({ title: "", price: 0.01, description: "", quantity: 1, location: "", image: "", productTypeId: 0 });
@@ -12,6 +13,13 @@ const ProductForm = props => {
     const stateToChange = { ...newProduct };
     stateToChange[evt.target.id] = evt.target.value;
     setNewProduct(stateToChange);
+  };
+
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    setNewProduct({
+      image: e.target.files[0]
+    })
   };
 
   const handleSubmit = e => {
@@ -27,6 +35,7 @@ const ProductForm = props => {
     if(newProduct.image == ""){
         image = null
     }
+
 
     const newProductObj = {
       "title": newProduct.title,
@@ -113,9 +122,9 @@ const ProductForm = props => {
       </fieldset>
       <fieldset>
         <label htmlFor="image"> Image URL </label>
-        <input onChange={handleFieldChange} type="text"
+        <input onChange={handleImageChange} type="file"
           id="image"
-          required="" autoFocus="" value={newProduct.image} />
+          required />
       </fieldset>
       <fieldset>
         <button type="submit">Submit</button>
