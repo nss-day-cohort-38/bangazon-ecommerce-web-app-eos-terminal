@@ -19,6 +19,20 @@ export default {
   },
   getProductById(productId) {
     return fetch(`${authApiUrl}/products/${productId}`)
-        .then(resp => resp.json())
+        .then(response => response.json())
+  },
+  getProducts() {
+    return fetch(`${authApiUrl}/products`)
+      .then(response => response.json())
+  },
+  getProductsByUser() {
+    return fetch(`${authApiUrl}/products`, {
+        "method": "GET",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+        }
+    })
+    .then(response => response.json())
   }
 }

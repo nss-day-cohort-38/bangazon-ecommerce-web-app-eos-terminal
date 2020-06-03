@@ -15,6 +15,7 @@ import ProductForm from "./products/ProductForm";
 import ProductTypeList from "./products/ProductTypeList";
 import ProductList from "./products/ProductList";
 import Home from "./home/Home";
+import MyProducts from "./products/MyProducts";
 
 
 const ApplicationViews = (props) => {
@@ -26,6 +27,9 @@ const ApplicationViews = (props) => {
         }}/>
         <Route path="/addproduct" render={props => {
             return <ProductForm { ...props }/>
+        }}/>
+        <Route path="/myproducts" render={props => {
+            return <MyProducts {...props}/>
         }}/>
         <Route path="/products/:productId(\d+)" render={props => {
             return <ProductDetail productId={parseInt(props.match.params.productId)} { ...props }/>
