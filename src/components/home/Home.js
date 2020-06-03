@@ -1,13 +1,38 @@
-import React from 'react';
+import React, { useState, useEffect } from "react";
+import HomeProductsCard from "./HomeProductsCard";
+import ProductManager from "../../modules/ProductManager";
 
 const Home = (props) => {
+  const [products, setProducts] = useState([]);
 
+  const getProducts = () => {
+    return ProductManager.getAllProducts().then((response) => {
+      console.log(response);
+      setProducts(response.reverse().slice(0, 20));
+    });
+  };
 
-    return (
-        <div className="content"> 
-        <p>Welcome to Bangazon</p> 
-        </div>
-    )
-}
+  console.log(products);
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  return (
+    <div className="content">
+      <p>Welcome to Bangazon</p>
+
+      <div className="">
+        {products.map((product) => (
+          <HomeProductsCard key={product.id} product={product} {...props} />
+        ))}
+      </div>
+
+      <div className="content">
+        <div></div>
+      </div>
+    </div>
+  );
+};
 
 export default Home;
