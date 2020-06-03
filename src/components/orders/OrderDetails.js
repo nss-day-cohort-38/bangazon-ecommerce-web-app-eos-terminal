@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import OrderManager from "../../modules/OrderManager";
-
+import OrderProductManager from "../../modules/OrderProductManager";
 
 const OrderDetail = props => {
   const [order, setOrder] = useState({ name: "" });
+  const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+    OrderProductManager.getOrderProducts()
     //get(id) from OrderManager and hang on to the data; put it into state
     OrderManager.get(props.orderId).then(order => {
       setOrder({

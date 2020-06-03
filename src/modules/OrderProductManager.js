@@ -1,8 +1,12 @@
 const orderProductsApiUrl = "http://localhost:8000/orderproducts";
 
 export default {
+    getOrderProducts() {
+        return fetch(`${orderProductsApiUrl}/orderproducts`).then((resp) =>
+        resp.json())
+    },
     addOrderProduct(orderProduct) {
-        return fetch(`${orderProductsApiUrl}`, {
+        return fetch(`${orderProductsApiUrl}/${orderProduct.id}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -6,6 +6,11 @@ const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
     const [productType, setProductType] = useState("")
 
+    const addingOrderProduct = () => {
+        ProductManager.getProductById(props.productId).then(
+            OrderProductManager.addOrderProduct(props.productId))
+    }
+
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
             setProduct({
@@ -46,6 +51,7 @@ const ProductDetail = (props) => {
                : null
             }
             <p>Quantity: {product.quantity}</p>
+            <button type="button" onClick={() => addingOrderProduct()}>Add to Order</button>
         </div>
     )
 }
