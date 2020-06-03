@@ -2,7 +2,7 @@ const orderProductsApiUrl = "http://localhost:8000/orderproducts";
 
 export default {
     getOrderProducts() {
-        return fetch(`${orderProductsApiUrl}/orderproducts`).then((resp) =>
+        return fetch(`${orderProductsApiUrl}`).then((resp) =>
         resp.json())
     },
     addOrderProduct(orderProduct) {
