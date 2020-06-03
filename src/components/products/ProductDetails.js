@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import ProductManager from '../../modules/ProductManager';
 import ProductTypeManager from '../../modules/ProductTypeManager';
+import OrderProductManager from '../../modules/OrderProductManager';
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
     const [productType, setProductType] = useState("")
