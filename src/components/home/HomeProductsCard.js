@@ -4,7 +4,6 @@ const HomeProductsCard = (props) => {
   return (
     <div className="card">
       <div className="card-content">
-        {/* <h3>Name:</h3> */}
         <a
           href=""
           onClick={() => {

@@ -7,12 +7,9 @@ const Home = (props) => {
 
   const getProducts = () => {
     return ProductManager.getAllProducts().then((response) => {
-      console.log(response);
       setProducts(response.reverse().slice(0, 20));
     });
   };
-
-  console.log(products);
 
   useEffect(() => {
     getProducts();
