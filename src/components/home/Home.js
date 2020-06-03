@@ -20,8 +20,8 @@ const Home = (props) => {
 
   return (
     <div className="content">
-      <p>Welcome to Bangazon</p>
-
+      <h3>Welcome to Bangazon!</h3>
+      <h3>Check out our most recent products</h3>
       <div className="">
         {products.map((product) => (
           <HomeProductsCard key={product.id} product={product} {...props} />
