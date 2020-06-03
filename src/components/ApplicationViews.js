@@ -33,6 +33,12 @@ const ApplicationViews = (props) => {
           return <ProductForm {...props} />;
         }}
       />
+      <Route 
+        path="/myproducts" 
+        render={props => {
+            return <MyProducts {...props}/>
+        }}
+      />
       <Route
         path="/products/:productId(\d+)"
         render={(props) => {
