@@ -43,7 +43,7 @@ const ProductDetail = (props) => {
             <p>Price: ${product.price}</p>
             <p>Description: {product.description}</p>
             {
-               product.location !== null
+               product.location !== "null" || null
                ? <p>Local Delivery Available In: {product.location}</p>
                : null
             }
