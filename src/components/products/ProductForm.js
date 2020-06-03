@@ -17,9 +17,9 @@ const ProductForm = props => {
 
   const handleImageChange = (e) => {
     e.preventDefault();
-    setNewProduct({
-      image: e.target.files[0]
-    })
+    const stateToChange = { ...newProduct };
+    stateToChange.image = e.target.files[0]
+    setNewProduct(stateToChange)
   };
 
   const handleSubmit = e => {
@@ -37,24 +37,24 @@ const ProductForm = props => {
     }
 
 
-    const newProductObj = {
-      "title": newProduct.title,
-      "price": Number(newProduct.price),
-      "description": newProduct.description,
-      "quantity": Number(newProduct.quantity),
-      "location": location,
-      "image": image,
-      "product_type_id": Number(newProduct.productTypeId)
-    }
+    const formData = new FormData()
+    formData.append('title', newProduct.title);
+    formData.append('price', Number(newProduct.price));
+    formData.append('description', newProduct.description);   
+    formData.append('quantity', Number(newProduct.quantity));
+    formData.append('image', image)
+    formData.append('location', location)
+    formData.append('product_type_id', Number(newProduct.productTypeId))
+
 
     if(newProduct.price == 0.01){
         if(window.confirm("Are you sure you want to sell this item for $0.01?")){
-            ProductManager.addProduct(newProductObj)
+            ProductManager.addProduct(formData)
             .then((response) => props.history.push(`/products/${response.id}`))
         }
     }
     else{
-        ProductManager.addProduct(newProductObj)
+        ProductManager.addProduct(formData)
         .then((response) => props.history.push(`/products/${response.id}`))
     }
     }
@@ -121,7 +121,7 @@ const ProductForm = props => {
         </div>
       </fieldset>
       <fieldset>
-        <label htmlFor="image"> Image URL </label>
+        <label htmlFor="image"> Image </label>
         <input onChange={handleImageChange} type="file"
           id="image"
           required />

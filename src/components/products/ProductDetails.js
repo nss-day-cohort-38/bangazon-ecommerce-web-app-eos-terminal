@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import ProductManager from '../../modules/ProductManager';
 import ProductTypeManager from '../../modules/ProductTypeManager';
+import "./ProductDetails.css"
+
+
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
     const [productType, setProductType] = useState("")
@@ -13,7 +16,7 @@ const ProductDetail = (props) => {
                 description: product.description,
                 quantity: product.quantity,
                 location: product.location,
-                imagePath: product.imagePath,
+                image: product.image,
                 productTypeId: product.productTypeId
             })
             ProductTypeManager.getAll().then(productTypes => {
@@ -32,9 +35,9 @@ const ProductDetail = (props) => {
         <div className="content">
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
             <h1>Product Detail:</h1>
-            {/* <picture>
-                <img src={require("")} alt="" />
-            </picture> */}
+            <picture>
+                <img src={product.image} alt="" />
+            </picture>
             <p>Title: {product.title}</p>
             <p>Product Type: {productType}</p>
             <p>Price: ${product.price}</p>
