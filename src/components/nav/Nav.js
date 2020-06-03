@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
 import "./Nav.css";
 import { withRouter, Link } from "react-router-dom";
 import useSimpleAuth from "../auth/useSimpleAuth";
-
 
 const NavBar = (props) => {
   const [search, setSearch] = useState({ searchBar: "" });
@@ -16,18 +15,18 @@ const NavBar = (props) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    e.target.querySelector('#searchBar').value = "";
+    e.target.querySelector("#searchBar").value = "";
     props.history.push({
-        pathname: '/results',
-        state: { search: search.searchBar }
-      })
+      pathname: "/results",
+      state: { search: search.searchBar },
+    });
   };
 
   return (
     <>
       <div id="navDiv">
         <nav>
-          <Link to="/ ">Home</Link>
+          <Link to="/">Home</Link>
           <Link to="/categories">Product Categories</Link>
           {isAuthenticated() ? (
             <>
@@ -40,7 +39,7 @@ const NavBar = (props) => {
                 onClick={() => {
                   logout();
                 }}
-                to="/ "
+                to="/"
               >
                 Log Out
               </Link>{" "}
@@ -54,20 +53,19 @@ const NavBar = (props) => {
         </nav>
         {isAuthenticated() ? (
           <div className="searchBarDiv">
-          <form onSubmit={handleSearch}>
-            <input
-              onChange={handleFieldChange}
-              type="text"
-              id="searchBar"
-              placeholder="Search for product/location"
-              // autoFocus=""
+            <form onSubmit={handleSearch}>
+              <input
+                onChange={handleFieldChange}
+                type="text"
+                id="searchBar"
+                placeholder="Search for product/location"
+                // autoFocus=""
               />
-          </form>
-        </div>
+            </form>
+          </div>
         ) : (
           <div className="searchBarDiv"></div>
         )}
-        
       </div>
     </>
   );
