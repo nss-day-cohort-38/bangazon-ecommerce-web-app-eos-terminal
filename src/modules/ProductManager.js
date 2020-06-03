@@ -9,7 +9,8 @@ export default {
         Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
       },
       body: newProduct
-    })
+    }).then((response) =>
+    response.json())
   },
   getProductTypes() {
     return fetch(`${authApiUrl}/producttypes`).then((response) =>
