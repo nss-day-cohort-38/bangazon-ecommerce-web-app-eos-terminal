@@ -4,7 +4,7 @@ export default {
         return fetch(`${authApiUrl}/products`, {
             "method": "POST",
             "headers": {
-                "Content-Type": "application/json",
+                "Content-Type": "multipart/form-data; boundary=<calculated when request is sent>",
                 "Accept": "application/json",
                 "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
             },
