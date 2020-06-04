@@ -5,15 +5,18 @@ import AccountManager from "../../modules/AccountManager";
 
 const MyAccount = (props) => {
   const [accountDetails, setAccountDetails] = useState({
+    id: "",
     firstName: "",
     lastName: "",
     address: "",
     phone: "",
   });
+  const [isEditing, setIsEditing] = useState(false);
 
   const generateAccount = () => {
     AccountManager.getAll().then((allUserData) => {
       const accountInfo = {
+        id: allUserData.id,
         firstName: allUserData.user.first_name,
         lastName: allUserData.user.last_name,
         address: allUserData.address,
@@ -23,11 +26,27 @@ const MyAccount = (props) => {
     });
   };
 
+  const handleFieldChange = (evt) => {
+    const stateToChange = { ...accountDetails };
+    stateToChange[evt.target.id] = evt.target.value;
+    setAccountDetails(stateToChange);
+  };
+
+  const updateAccount = (evt) => {
+    evt.preventDefault();
+
+    AccountManager.update(accountDetails).then(() => toggleEdit());
+  };
+
+  const toggleEdit = () => {
+    setIsEditing(!isEditing);
+  };
+
   useEffect(() => {
     generateAccount();
   }, []);
 
-  return (
+  return !isEditing ? (
     <>
       <div className="content">
         <h1>My Account:</h1>
@@ -40,7 +59,7 @@ const MyAccount = (props) => {
         <button
           type="button"
           onClick={() => {
-            window.alert("This will route to edit form");
+            toggleEdit();
           }}
         >
           Edit Personal Info
@@ -67,6 +86,54 @@ const MyAccount = (props) => {
         </button>
       </div>
     </>
+  ) : (
+    <div className="content">
+      <h1>Account Info:</h1>
+      <button
+        type="button"
+        onClick={() => {
+          toggleEdit();
+        }}
+      >
+        Go Back
+      </button>
+      <p>First Name: {accountDetails.firstName}</p>
+      <form onSubmit={updateAccount}>
+        <fieldset>
+          <label htmlFor="lastName">Last Name:</label>
+          <input
+            type="text"
+            required
+            onChange={handleFieldChange}
+            id="lastName"
+            value={accountDetails.lastName}
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="address">Address:</label>
+          <input
+            type="text"
+            required
+            onChange={handleFieldChange}
+            id="address"
+            value={accountDetails.address}
+          />
+        </fieldset>
+        <fieldset>
+          <label htmlFor="phone">Phone Number:</label>
+          <input
+            type="text"
+            required
+            onChange={handleFieldChange}
+            id="phone"
+            value={accountDetails.phone}
+          />
+        </fieldset>
+        <fieldset>
+          <button type="submit">Save Changes</button>
+        </fieldset>
+      </form>
+    </div>
   );
 };
 
