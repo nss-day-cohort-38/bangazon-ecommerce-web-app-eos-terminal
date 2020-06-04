@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import OrderManager from "../../modules/OrderManager";
-import ProductManager from "../../modules/ProductManager";
 import OrderProductManager from "../../modules/OrderProductManager";
 
 const OrderDetail = props => {
@@ -8,18 +7,14 @@ const OrderDetail = props => {
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
+  const getUserProducts = () => {
     OrderProductManager.getOrderProducts().then(orderProducts => {
-      ProductManager.getAllProducts().then(products => {
-        products.map(
-          orderProducts.map(
-            products.id === orderProducts.product_id ? 
-              setProducts({products}) : null
-          )
-        )
-      })
+      setProducts(orderProducts)
     })
-    
+  } 
+
+  useEffect(() => {
+    getUserProducts()
     //get(id) from OrderManager and hang on to the data; put it into state
     OrderManager.get(props.orderId).then(order => {
       setOrder({
@@ -28,6 +23,15 @@ const OrderDetail = props => {
       setIsLoading(false);
     });
   }, [props.orderId]);
+
+  const handleOPDelete = (product_id) => {
+    setIsLoading(true);
+    products.map(product => {
+      product_id = product.id
+    })
+    OrderProductManager.deleteOrderProduct(product_id).then(() =>
+    props.history.push("/order"))
+  };
 
   const handleDelete = () => {
     //invoke the delete function in OrderManger and re-direct to the order list.
@@ -48,6 +52,18 @@ const OrderDetail = props => {
         <h3>
           Created At: <span style={{ color: "darkslategrey" }}>{order.created_at}</span>
         </h3>
+        <ul>
+        <div>{products.map(product => 
+          <li key={product.id}>
+            <span>Title: {product.product.title}</span>
+            <span> -- Price: ${product.product.price}</span>
+            <button 
+            type="button"
+            disabled={isLoading}
+            onClick={handleOPDelete}>Remove</button>
+           </li>
+        )}</div>
+        </ul>
 
         <button
           type="button"

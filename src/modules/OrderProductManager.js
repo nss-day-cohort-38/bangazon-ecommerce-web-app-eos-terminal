@@ -21,8 +21,8 @@ export default {
             body: JSON.stringify(orderProduct),
         }).then((response) => response.json());
     },
-    deleteOrderProduct(orderProductId) {
-        return fetch(`${orderProductsApiUrl}/${orderProductId}`, {
+    deleteOrderProduct(id) {
+        return fetch(`${orderProductsApiUrl}/${id}`, {
             "method": "DELETE",
             "headers": {
                 "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`

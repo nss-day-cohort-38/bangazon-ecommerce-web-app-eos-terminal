@@ -13,7 +13,7 @@ const ProductDetail = (props) => {
             product_id: props.productId
         };
         OrderProductManager.addOrderProduct(newItemToAdd).then(
-            console.log("testing post", newItemToAdd)
+            window.alert("Item has been added to your cart.")
         )
     }
 
