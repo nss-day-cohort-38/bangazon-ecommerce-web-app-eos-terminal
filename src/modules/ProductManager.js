@@ -22,7 +22,7 @@ export default {
         .then(response => response.json())
   },
   getProductsByUser() {
-    return fetch(`${authApiUrl}/products`, {
+    return fetch(`${authApiUrl}/products?user`, {
         "method": "GET",
         "headers": {
             "Accept": "application/json",
