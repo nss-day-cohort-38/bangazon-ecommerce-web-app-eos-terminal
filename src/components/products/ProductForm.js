@@ -22,7 +22,14 @@ const ProductForm = (props) => {
     setNewProduct(stateToChange);
   };
 
-  const handleSubmit = (e) => {
+  const handleImageChange = (e) => {
+    e.preventDefault();
+    const stateToChange = { ...newProduct };
+    stateToChange.image = e.target.files[0]
+    setNewProduct(stateToChange)
+  };
+
+  const handleSubmit = e => {
     e.preventDefault();
 
     let location = newProduct.location;
@@ -36,28 +43,27 @@ const ProductForm = (props) => {
       image = null;
     }
 
-    const newProductObj = {
-      title: newProduct.title,
-      price: Number(newProduct.price),
-      description: newProduct.description,
-      quantity: Number(newProduct.quantity),
-      location: location,
-      image: image,
-      product_type_id: Number(newProduct.productTypeId),
-    };
+    const formData = new FormData()
+    formData.append('title', newProduct.title);
+    formData.append('price', Number(newProduct.price));
+    formData.append('description', newProduct.description);   
+    formData.append('quantity', Number(newProduct.quantity));
+    formData.append('image', image)
+    formData.append('location', location)
+    formData.append('product_type_id', Number(newProduct.productTypeId))
 
     if (newProduct.price == 0.01) {
       if (
         window.confirm("Are you sure you want to sell this item for $0.01?")
       ) {
-        ProductManager.addProduct(newProductObj).then((response) =>
+        ProductManager.addProduct(formData).then((response) =>
           props.history.push(`/products/${response.id}`)
         );
       }
     } else if (newProduct.price > 10000) {
       window.confirm("The price must be $10,000 or less");
     } else {
-      ProductManager.addProduct(newProductObj).then((response) =>
+      ProductManager.addProduct(formData).then((response) =>
         props.history.push(`/products/${response.id}`)
       );
     }
@@ -170,15 +176,10 @@ const ProductForm = (props) => {
           </div>
         </fieldset>
         <fieldset>
-          <label htmlFor="image"> Image URL </label>
-          <input
-            onChange={handleFieldChange}
-            type="text"
+          <label htmlFor="image"> Image </label>
+          <input onChange={handleImageChange} type="file"
             id="image"
-            required=""
-            autoFocus=""
-            value={newProduct.image}
-          />
+            required />
         </fieldset>
         <fieldset>
           <button type="submit">Submit</button>
