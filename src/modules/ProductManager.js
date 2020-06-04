@@ -34,4 +34,12 @@ export default {
   getAllProducts() {
     return fetch(`${authApiUrl}/products`).then((response) => response.json());
   },
+  deleteProduct(productId) {
+    return fetch(`${authApiUrl}/products/${productId}`, {
+        "method": "DELETE",
+        "headers": {
+            "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+        }
+    })
+  }
 };

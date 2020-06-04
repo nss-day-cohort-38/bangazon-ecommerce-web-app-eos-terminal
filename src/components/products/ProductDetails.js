@@ -7,7 +7,7 @@ import "./ProductDetails.css"
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
     const [productType, setProductType] = useState("")
-
+    
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
             setProduct({

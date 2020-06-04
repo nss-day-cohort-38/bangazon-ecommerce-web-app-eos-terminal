@@ -16,8 +16,14 @@ const MyProducts = (props) => {
         }
     };
 
+    const deleteProduct = (productId) => {
+        ProductManager.deleteProduct(productId)
+            .then(getProducts)
+    }
+
     useEffect(() => {
         getProducts();
+       
     }, []);
 
     return (
@@ -26,7 +32,11 @@ const MyProducts = (props) => {
             <h2>My Current Listings</h2>
             <div>
                 {products.map(product => 
+                    <div>
                     <p key={product.id} className="detail-link" onClick={() => props.history.push(`/products/${parseInt(product.id)}`)}>{product.title}</p>
+                    <button onClick={() => { deleteProduct(product.id) }}>Remove Listing</button>
+                    <hr className='lineBreak'></hr>
+                    </div>
                 )}
             </div>
             </div>
