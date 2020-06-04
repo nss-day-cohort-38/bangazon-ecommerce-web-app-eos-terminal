@@ -57,6 +57,7 @@ const ProductDetail = (props) => {
                : null
             }
             <p>Quantity: {product.quantity}</p>
+            <select type="select" value={product.quantity}></select>
             <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
         </div>
     )
