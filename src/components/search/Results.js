@@ -37,13 +37,13 @@ const SearchResults = (props) => {
     <div className="content">
       <h3>{results.length} product(s) found matching your search</h3>
       {results.map(result => (
-        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
+        <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
       ))}
 
       <h3>{local.length} product(s) found with location matching your search</h3>
       
       {local.map(result => (
-        <strong><li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id}>{result.title}</li></strong>
+        <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
       ))}
     </div>
     )

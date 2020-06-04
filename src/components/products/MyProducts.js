@@ -26,7 +26,7 @@ const MyProducts = (props) => {
             <h2>My Current Listings</h2>
             <div>
                 {products.map(product => 
-                    <p>{product.title}</p>
+                    <p key={product.id} className="detail-link" onClick={() => props.history.push(`/products/${parseInt(product.id)}`)}>{product.title}</p>
                 )}
             </div>
             </div>
