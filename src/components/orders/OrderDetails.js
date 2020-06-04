@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import OrderManager from "../../modules/OrderManager";
+import ProductManager from "../../modules/ProductManager";
 import OrderProductManager from "../../modules/OrderProductManager";
 
 const OrderDetail = props => {
@@ -8,7 +9,17 @@ const OrderDetail = props => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    OrderProductManager.getOrderProducts()
+    OrderProductManager.getOrderProducts().then(orderProducts => {
+      ProductManager.getAllProducts().then(products => {
+        products.map(
+          orderProducts.map(
+            products.id === orderProducts.product_id ? 
+              setProducts({products}) : null
+          )
+        )
+      })
+    })
+    
     //get(id) from OrderManager and hang on to the data; put it into state
     OrderManager.get(props.orderId).then(order => {
       setOrder({

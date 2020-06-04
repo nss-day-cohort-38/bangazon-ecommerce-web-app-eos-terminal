@@ -2,16 +2,21 @@ const orderProductsApiUrl = "http://localhost:8000/orderproducts";
 
 export default {
     getOrderProducts() {
-        return fetch(`${orderProductsApiUrl}`).then((resp) =>
-        resp.json())
+        return fetch(`${orderProductsApiUrl}`, {
+            headers: {
+                "Content-Type": "application/json",
+                Accept: "application/json",
+                Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`
+            }
+        }).then((resp) => resp.json())
     },
     addOrderProduct(orderProduct) {
-        return fetch(`${orderProductsApiUrl}/${orderProduct.id}`, {
+        return fetch(`${orderProductsApiUrl}`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 Accept: "application/json",
-                Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
+                Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`
             },
             body: JSON.stringify(orderProduct),
         }).then((response) => response.json());
