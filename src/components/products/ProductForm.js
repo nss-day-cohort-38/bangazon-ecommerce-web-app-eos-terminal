@@ -179,7 +179,7 @@ const ProductForm = (props) => {
           <label htmlFor="image"> Image </label>
           <input onChange={handleImageChange} type="file"
             id="image"
-           />
+             />
         </fieldset>
         <fieldset>
           <button type="submit">Submit</button>
