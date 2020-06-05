@@ -5,7 +5,7 @@ import OrderManager from "../../modules/OrderManager";
 
 const Cart = (props) => {
 
-  const [order, setOrder] = useState([{ url: "", created_at: "", payment_type: {} }]);
+  const [order, setOrder] = useState([{ url: "", created_at: "", payment_type: "" }]);
   const [orders, setOrders] = useState([]);
 
   const getCurrentOrder = () => {
@@ -15,10 +15,10 @@ const Cart = (props) => {
                 {if(orderobj.payment_type != null) {
                     console.log(orderobj.payment_type.merchant_name)
                     console.log(orderobj)
-                    setOrder(orderobj)
                 }
                 else {
                     console.log(orderobj.payment_type)
+                    setOrder(orderobj)
                 }})
             setOrders(ordersFromAPI)
         });
@@ -28,11 +28,20 @@ const Cart = (props) => {
     getCurrentOrder()
   }, []);
 
-  return (
-    <div className="content">
-        Welcome to your cart.
-        
-    </div>
-  );
+  if (order.payment_type === null) {
+    return (
+        <div className="content">
+            Welcome to your cart.
+            <p>Your cart was opened on {order.created_at.split('T')[0]}</p>
+        </div>
+      ) 
+  } else {
+    return (
+        <div className="content">
+            There is nothing in your cart!
+        </div>
+    )
+  }
+
 };
 export default Cart;
