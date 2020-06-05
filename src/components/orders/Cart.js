@@ -5,24 +5,33 @@ import OrderManager from "../../modules/OrderManager";
 
 const Cart = (props) => {
 
-  const [order, setOrder] = useState([{ customer: "", created_at: "", payment_type: "" }]);
+  const [order, setOrder] = useState([{ url: "", created_at: "", payment_type: {} }]);
   const [orders, setOrders] = useState([]);
 
   const getCurrentOrder = () => {
-    OrderManager.getAll()
+    return OrderManager.getAll()
         .then((ordersFromAPI) => {
+            ordersFromAPI.map(orderobj => 
+                {if(orderobj.payment_type != null) {
+                    console.log(orderobj.payment_type.merchant_name)
+                    console.log(orderobj)
+                    setOrder(orderobj)
+                }
+                else {
+                    console.log(orderobj.payment_type)
+                }})
             setOrders(ordersFromAPI)
         });
-  };
+    };
 
   useEffect(() => {
-    getCurrentOrder();
+    getCurrentOrder()
   }, []);
 
   return (
     <div className="content">
         Welcome to your cart.
-        {orders.map(order => order.)}
+        
     </div>
   );
 };
