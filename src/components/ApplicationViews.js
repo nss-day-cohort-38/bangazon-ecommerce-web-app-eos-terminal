@@ -16,6 +16,7 @@ import ProductTypeList from "./products/ProductTypeList";
 import ProductList from "./products/ProductList";
 import Home from "./home/Home";
 import MyProducts from "./products/MyProducts";
+import Cart from "./orders/Cart";
 
 const ApplicationViews = (props) => {
   return (
@@ -75,7 +76,13 @@ const ApplicationViews = (props) => {
           return <OrderList {...props} />;
         }}
       />
-
+      <Route
+        exact
+        path="/cart"
+        render={(props) => {
+          return <Cart {...props} />;
+        }}
+      />
       <Route
         path="/neworder"
         render={(props) => {

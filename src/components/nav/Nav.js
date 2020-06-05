@@ -33,7 +33,7 @@ const NavBar = (props) => {
               {" "}
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
-              <Link to="/order">View Cart</Link>
+              <Link to="/cart">View Cart</Link>
               <Link to="/myaccount">My Account</Link>
               <Link
                 onClick={() => {

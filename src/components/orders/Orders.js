@@ -1,4 +1,4 @@
-// viewing a list of past orders
+// viewing a list of past orders (all orders that have a payment type attached)
 
 import React, { useState, useEffect } from "react";
 //import the components we will need
