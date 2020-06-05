@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
 import RecommendedProductManager from "../../modules/RecommendedProductManager";
+import { createBrowserHistory } from "history";
+const history = createBrowserHistory();
+
+console.log(history.location.pathname.split("/")[2]);
 
 const RecommendationForm = (props) => {
   const [newRecommendation, setNewRecommendation] = useState({
-    recommendedUserId: 0,
+    recommendedUserId: 1,
     product_id: 1,
   });
   const [recommendedUsers, setRecommendedUsers] = useState([]);
@@ -26,7 +30,7 @@ const RecommendationForm = (props) => {
     console.log(newRecommendationObj);
 
     RecommendedProductManager.post(newRecommendationObj).then(() =>
-      props.history.push("/ ")
+      props.history.push("/")
     );
   };
 
@@ -48,7 +52,7 @@ const RecommendationForm = (props) => {
           onChange={handleFieldChange}
         >
           {recommendedUsers.map((recommendedUser) => (
-            <option key={recommendedUser.id} value={recommendedUser.user_id}>
+            <option key={recommendedUser.id} value={recommendedUser.id}>
               {recommendedUser.user.username}
             </option>
           ))}
