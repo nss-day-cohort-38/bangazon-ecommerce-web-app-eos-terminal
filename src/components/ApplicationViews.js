@@ -17,6 +17,7 @@ import ProductList from "./products/ProductList";
 import Home from "./home/Home";
 import RecommendationForm from "./recommendations/RecommendationForm";
 import MyProducts from "./products/MyProducts";
+import RecommendationList from "./recommendations/Recommendations";
 
 const ApplicationViews = (props) => {
   return (
@@ -149,6 +150,12 @@ const ApplicationViews = (props) => {
               {...props}
             />
           );
+        }}
+      />
+      <Route
+        path="/recommendedproducts"
+        render={(props) => {
+          return <RecommendationList {...props} />;
         }}
       />
     </>
