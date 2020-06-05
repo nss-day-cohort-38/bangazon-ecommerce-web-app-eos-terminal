@@ -1,14 +1,10 @@
 import React, { useEffect, useState } from "react";
 import RecommendedProductManager from "../../modules/RecommendedProductManager";
-import { createBrowserHistory } from "history";
-const history = createBrowserHistory();
-
-console.log(history.location.pathname.split("/")[2]);
 
 const RecommendationForm = (props) => {
   const [newRecommendation, setNewRecommendation] = useState({
     recommendedUserId: 1,
-    product_id: 1,
+    product_id: props.history.location.pathname.split("/")[2],
   });
   const [recommendedUsers, setRecommendedUsers] = useState([]);
 
@@ -30,7 +26,7 @@ const RecommendationForm = (props) => {
     console.log(newRecommendationObj);
 
     RecommendedProductManager.post(newRecommendationObj).then(() =>
-      props.history.push("/")
+      props.history.go(-1)
     );
   };
 
@@ -59,7 +55,7 @@ const RecommendationForm = (props) => {
         </select>
       </fieldset>
       <fieldset>
-        <button type="submit">Submit</button>
+        <button type="submit">Send Notification</button>
       </fieldset>
     </form>
   );

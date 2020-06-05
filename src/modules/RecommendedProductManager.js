@@ -15,7 +15,6 @@ export default {
     }).then((result) => result.json());
   },
   post(newRecommendation) {
-    console.log(newRecommendation);
     return fetch(`${remoteURL}/recommendedproducts`, {
       method: "POST",
       headers: {

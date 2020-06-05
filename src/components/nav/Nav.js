@@ -2,10 +2,23 @@ import React, { useState } from "react";
 import "./Nav.css";
 import { withRouter, Link } from "react-router-dom";
 import useSimpleAuth from "../auth/useSimpleAuth";
+import RecommendProductManager from "../../modules/RecommendedProductManager";
 
 const NavBar = (props) => {
   const [search, setSearch] = useState({ searchBar: "" });
+  const [editReset, setEditReset] = useState({ isRouting: true });
   const { isAuthenticated, logout } = useSimpleAuth();
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+
+  const getRecommendedProducts = () => {
+    // After the data comes back from the API, we
+    //  use the setOrders function to update state
+    return RecommendProductManager.getAll().then((res) => {
+      setRecommendedProducts(res.length);
+    });
+  };
+
+  getRecommendedProducts();
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...search };
@@ -22,6 +35,13 @@ const NavBar = (props) => {
     });
   };
 
+  const resetEdit = () => {
+    props.history.push({
+      pathname: "/myaccount",
+      state: { editReset: editReset.isRouting },
+    });
+  };
+
   return (
     <>
       <div id="navDiv">
@@ -34,7 +54,16 @@ const NavBar = (props) => {
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
               <Link to="/order">View Cart</Link>
-              <Link to="/myaccount">My Account</Link>
+              <Link to="/recommendproducts">
+                Recommendations({recommendedProducts})
+              </Link>
+              <a
+                onClick={() => {
+                  resetEdit();
+                }}
+              >
+                My Account
+              </a>
               <Link
                 onClick={() => {
                   logout();

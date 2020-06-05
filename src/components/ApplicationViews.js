@@ -141,9 +141,14 @@ const ApplicationViews = (props) => {
         }}
       />
       <Route
-        path="/recommendproducts"
+        path="/recommendproducts/:productId(\d+)"
         render={(props) => {
-          return <RecommendationForm {...props} />;
+          return (
+            <RecommendationForm
+              productId={parseInt(props.match.params.productId)}
+              {...props}
+            />
+          );
         }}
       />
     </>
