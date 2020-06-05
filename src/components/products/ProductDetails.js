@@ -50,6 +50,15 @@ const ProductDetail = (props) => {
         })
         
     }, [])
+
+    let i = Number;
+    const quantity = product.quantity
+    const selectOptions = []
+
+    for(i=1; i < quantity+1; i++) {
+        selectOptions.push(<option key={product.id} id="quantity" value={product.quantity}>{i}</option>)
+    }
+
     return (
         <div className="content">
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
@@ -72,12 +81,9 @@ const ProductDetail = (props) => {
               value={1 || ""}
               onChange={onSelectHandler}
             >
-              <option value="">
-                <em>Select</em>
-              </option>
-                  <option key={product.id} id={"quantity"} value={product.quantity}>
-                    {product.quantity}
-                  </option>
+                {selectOptions.map(option => {
+                    return <option>{Number(option)}</option>
+                })}
             </select>
             <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
         </div>
