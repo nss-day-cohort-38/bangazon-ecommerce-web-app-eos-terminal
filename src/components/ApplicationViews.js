@@ -15,6 +15,7 @@ import ProductForm from "./products/ProductForm";
 import ProductTypeList from "./products/ProductTypeList";
 import ProductList from "./products/ProductList";
 import Home from "./home/Home";
+import MyProducts from "./products/MyProducts";
 
 const ApplicationViews = (props) => {
   return (
@@ -30,6 +31,12 @@ const ApplicationViews = (props) => {
         path="/addproduct"
         render={(props) => {
           return <ProductForm {...props} />;
+        }}
+      />
+      <Route 
+        path="/myproducts" 
+        render={props => {
+            return <MyProducts {...props}/>
         }}
       />
       <Route

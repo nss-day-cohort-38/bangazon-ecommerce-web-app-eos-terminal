@@ -18,11 +18,28 @@ export default {
     );
   },
   getProductById(productId) {
-    return fetch(`${authApiUrl}/products/${productId}`).then((resp) =>
-      resp.json()
-    );
+    return fetch(`${authApiUrl}/products/${productId}`)
+        .then(response => response.json())
+  },
+  getProductsByUser() {
+    return fetch(`${authApiUrl}/products?user`, {
+        "method": "GET",
+        "headers": {
+            "Accept": "application/json",
+            "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+        }
+    })
+    .then(response => response.json())
   },
   getAllProducts() {
     return fetch(`${authApiUrl}/products`).then((response) => response.json());
   },
+  deleteProduct(productId) {
+    return fetch(`${authApiUrl}/products/${productId}`, {
+        "method": "DELETE",
+        "headers": {
+            "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
+        }
+    })
+  }
 };
