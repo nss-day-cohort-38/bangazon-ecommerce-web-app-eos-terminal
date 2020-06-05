@@ -6,7 +6,9 @@ import "./ProductDetails.css"
 
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
+    const [selectProduct, setSelectProduct] = useState("")
     const [productType, setProductType] = useState("")
+    const [select, setSelect] = useState(false)
 
     const handleOrderAdd = () => {
         const newItemToAdd = {
@@ -16,6 +18,14 @@ const ProductDetail = (props) => {
             window.alert("Item has been added to your cart.")
         )
     }
+
+    const onSelectHandler = e => {
+        setSelect(true);
+        setSelectProduct(e.target.value);
+        const stateToChange = { ...product };
+        stateToChange["quantity"] = e.target.value;
+        setProduct(stateToChange);
+      };
 
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
@@ -57,7 +67,18 @@ const ProductDetail = (props) => {
                : null
             }
             <p>Quantity: {product.quantity}</p>
-            <select type="select" value={product.quantity}></select>
+            <select
+              id="quantity"
+              value={1 || ""}
+              onChange={onSelectHandler}
+            >
+              <option value="">
+                <em>Select</em>
+              </option>
+                  <option key={product.id} id={"quantity"} value={product.quantity}>
+                    {product.quantity}
+                  </option>
+            </select>
             <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
         </div>
     )
