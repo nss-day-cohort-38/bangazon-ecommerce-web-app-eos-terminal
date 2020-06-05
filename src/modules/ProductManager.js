@@ -41,5 +41,17 @@ export default {
             "Authorization": `Token ${sessionStorage.getItem("bangazon-token")}`
         }
     })
-  }
+  },
+  updateProductQuantity(editedInfo) {
+    return fetch(`${authApiUrl}/products/${editedInfo.id}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${sessionStorage.getItem("bangazon-token")}`,
+      },
+      body: JSON.stringify({
+        quantity: editedInfo.quantity
+      }),
+    });
+  },
 };
