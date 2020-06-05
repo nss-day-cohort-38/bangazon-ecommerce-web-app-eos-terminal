@@ -15,7 +15,7 @@ const SearchResults = (props) => {
           product => product.title.toUpperCase().includes(search.toUpperCase())
         );
         const localProducts = allProducts.filter(
-          product => product.location).filter(product => product.location.toUpperCase().includes(search.toUpperCase())
+          product => product.location).filter(product => product.location.toUpperCase().includes(search.toUpperCase() && product.location != "null")
           );
         setResults(matchProducts);
         setLocal(localProducts);
@@ -37,13 +37,23 @@ const SearchResults = (props) => {
     <div className="content">
       <h3>{results.length} product(s) found matching your search</h3>
       {results.map(result => (
+        <>
+         <picture>
+         <img className="searchImage" src={result.image} alt=""/>
+        </picture>
         <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
+        </>
       ))}
 
       <h3>{local.length} product(s) found with location matching your search</h3>
       
       {local.map(result => (
+        <>
+         <picture>
+         <img className="searchImage" src={result.image} alt=""/>
+        </picture>
         <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
+        </>
       ))}
     </div>
     )
