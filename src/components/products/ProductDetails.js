@@ -11,15 +11,37 @@ const ProductDetail = (props) => {
     const [selectProduct, setSelectProduct] = useState("")
     const [productType, setProductType] = useState("")
     const [select, setSelect] = useState(false)
+    const [newQuantity, setNewQuantity] = useState({ quantity: "", id: props.productId })
+    const [user, setUser] = useState({ id: 0 })
+    const [isEditing, setIsEditing] = useState(false);
+    
+    let i = 1;
+    const quantity = initialQuantity
+    const selectOptions = []
+
+    for(i=1; i < quantity+1; i++) {
+        selectOptions.push(i)
+    }
+
+    const toggleEdit = () => {
+        setIsEditing(!isEditing);
+    };
 
     const handleOrderAdd = () => {
         const newItemToAdd = {
             product_id: props.productId
         };
-        OrderProductManager.addOrderProduct(newItemToAdd).then(
-            window.alert("Item has been added to your cart.")
-        )
+        {for( i=0; i < initialQuantity - product.quantity; i++) {
+            OrderProductManager.addOrderProduct(newItemToAdd)
+        }}
+        window.alert(`${i} item's have been added to your cart.`)
     }
+
+    const handleFieldChange = (evt) => {
+        const stateToChange = { ...newQuantity };
+        stateToChange[evt.target.id] = evt.target.value;
+        setNewQuantity(stateToChange);
+    };
 
     const onSelectHandler = e => {
         setSelect(true);
@@ -29,27 +51,16 @@ const ProductDetail = (props) => {
         setProduct(stateToChange);
       };
 
-    const [newQuantity, setNewQuantity] = useState({ quantity: "", id: props.productId })
-    const [user, setUser] = useState({ id: 0 })
-    const [isEditing, setIsEditing] = useState(false);
-
-    const handleFieldChange = (evt) => {
-        const stateToChange = { ...newQuantity };
-        stateToChange[evt.target.id] = evt.target.value;
-        setNewQuantity(stateToChange);
-    };
-
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
-    };
-
     const updateQuantity = (evt) => {
         evt.preventDefault();
+        if(newQuantity.quantity == "") {
+            ProductManager.updateProductQuantity({quantity: product.quantity, id: props.productId})
+        } else {
         ProductManager.updateProductQuantity(newQuantity).then(() => toggleEdit());
         const stateToChange = { ...product };
         stateToChange["quantity"] = newQuantity.quantity;
         setProduct(stateToChange)
-      };
+      }};
 
 
     useEffect(() => {
@@ -84,14 +95,6 @@ const ProductDetail = (props) => {
 
     }, [])
 
-    let i = 1;
-    const quantity = initialQuantity
-    const selectOptions = []
-
-    for(i=1; i < quantity+1; i++) {
-        selectOptions.push(i)
-    }
-
     return (
         <div className="content">
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
@@ -108,17 +111,20 @@ const ProductDetail = (props) => {
                     ? <p>Local Delivery Available In: {product.location}</p>
                     : null
             }
-            <p>Quantity: {product.quantity}</p>
-            <select
+            {product.customer_id !== user.id ? <><p>Quantity: {product.quantity}</p><select
               id="quantity"
-              onChange={onSelectHandler}
-            >
+              onChange={onSelectHandler}>
                 <selected></selected>
                 {selectOptions.map(option => (
                     <option id="quantity" value={option}>{option}</option>
                 ))}
             </select>
-            <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
+            <form onSubmit={updateQuantity}>
+                <button type="submit" onClick={handleOrderAdd}>
+                    Add to Order</button>
+                </form>
+            </> : null}
+            
             {
                 isEditing
                     ? <form onSubmit={updateQuantity}>
@@ -133,13 +139,14 @@ const ProductDetail = (props) => {
                             />
                         <button type="submit">Save</button>
                     </form>
-                    : <><div>Quantity: {product.quantity}
+                        : <>
                     {
                         product.customer_id == user.id
-                        ?  <button type="button" onClick={() => { toggleEdit(); }}>Update</button>
+                        ?  <div>Quantity: {product.quantity}
+                        <button type="button" onClick={() => { toggleEdit(); }}>Update</button>
+                        </div>
                         : null
-
-                    }</div></>
+                    }</>
                    
             }
 

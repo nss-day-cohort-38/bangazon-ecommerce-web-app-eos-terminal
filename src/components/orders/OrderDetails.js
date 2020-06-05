@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import OrderManager from "../../modules/OrderManager";
 import OrderProductManager from "../../modules/OrderProductManager";
+import ProductManager from "../../modules/ProductManager";
 
 const OrderDetail = props => {
   const [order, setOrder] = useState({ name: "" });
@@ -12,6 +13,26 @@ const OrderDetail = props => {
       setProducts(orderProducts)
     })
   } 
+  
+  const handleDelete = () => {
+    //invoke the delete function in OrderManger and re-direct to the order list.
+    setIsLoading(true);
+    OrderManager.delete(props.orderId).then(() =>
+      props.history.push("/order")
+    );
+  };
+
+  const handleOPDelete = (product_id, orderProduct_id) => {
+    setIsLoading(true);
+    products.map(product => {
+      orderProduct_id = product.id
+      product_id = product.product_id
+    })
+    OrderProductManager.deleteOrderProduct(orderProduct_id)
+      .then(ProductManager.updateProductQuantity({quantity: 1, id: product_id}))
+        .then(() =>
+          props.history.push("/order"))
+  };
 
   useEffect(() => {
     getUserProducts()
@@ -23,23 +44,6 @@ const OrderDetail = props => {
       setIsLoading(false);
     });
   }, [props.orderId]);
-
-  const handleOPDelete = (product_id) => {
-    setIsLoading(true);
-    products.map(product => {
-      product_id = product.id
-    })
-    OrderProductManager.deleteOrderProduct(product_id).then(() =>
-    props.history.push("/order"))
-  };
-
-  const handleDelete = () => {
-    //invoke the delete function in OrderManger and re-direct to the order list.
-    setIsLoading(true);
-    OrderManager.delete(props.orderId).then(() =>
-      props.history.push("/order")
-    );
-  };
 
   return (
     <div className="content">
@@ -54,6 +58,7 @@ const OrderDetail = props => {
         </h3>
         <ul>
         <div>{products.map(product => 
+        <>
           <li key={product.id}>
             <span>Title: {product.product.title}</span>
             <span> -- Price: ${product.product.price}</span>
@@ -61,7 +66,7 @@ const OrderDetail = props => {
             type="button"
             disabled={isLoading}
             onClick={handleOPDelete}>Remove</button>
-           </li>
+           </li></>
         )}</div>
         </ul>
 
