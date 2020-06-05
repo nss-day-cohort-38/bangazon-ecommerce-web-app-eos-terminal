@@ -1,3 +1,21 @@
+
 a:hover {
 cursor: pointer;
 }
+
+.products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .product-card {
+    padding: 2%;
+    flex-grow: 1;
+    flex-basis: 16%;
+    margin-top: auto;
+    display: flex; 
+  }
+
+  .product-info {
+    margin-top: auto;
+  }
