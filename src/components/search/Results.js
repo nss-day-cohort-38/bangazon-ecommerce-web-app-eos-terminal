@@ -15,7 +15,7 @@ const SearchResults = (props) => {
           product => product.title.toUpperCase().includes(search.toUpperCase())
         );
         const localProducts = allProducts.filter(
-          product => product.location).filter(product => product.location.toUpperCase().includes(search.toUpperCase())
+          product => product.location).filter(product => product.location.toUpperCase().includes(search.toUpperCase() && product.location != "null")
           );
         setResults(matchProducts);
         setLocal(localProducts);
