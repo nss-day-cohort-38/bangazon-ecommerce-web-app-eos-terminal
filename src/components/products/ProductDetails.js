@@ -108,7 +108,6 @@ const ProductDetail = (props) => {
                     ? <p>Local Delivery Available In: {product.location}</p>
                     : null
             }
-<<<<<<< HEAD
             <p>Quantity: {product.quantity}</p>
             <select
               id="quantity"
@@ -120,7 +119,6 @@ const ProductDetail = (props) => {
                 ))}
             </select>
             <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
-=======
             {
                 isEditing
                     ? <form onSubmit={updateQuantity}>
@@ -145,7 +143,6 @@ const ProductDetail = (props) => {
                    
             }
 
->>>>>>> master
         </div>
     )
 }
