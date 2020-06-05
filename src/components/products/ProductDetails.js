@@ -30,13 +30,6 @@ const ProductDetail = (props) => {
         setProduct(stateToChange)
       };
 
-    useEffect(() => {
-        AccountManager.getAll().then(user => {
-         setUser({
-             id: user.id
-         })   
-        })
-    })
 
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
@@ -60,6 +53,11 @@ const ProductDetail = (props) => {
                 })
                 setProductType(filteredProductType)
             })
+            AccountManager.getAll().then(user => {
+                setUser({
+                    id: user.id
+                })   
+               })
         })
 
     }, [])
