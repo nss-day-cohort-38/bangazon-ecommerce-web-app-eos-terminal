@@ -22,9 +22,6 @@ const RecommendationForm = (props) => {
       recommended_user_id: parseInt(newRecommendation.recommendedUserId),
     };
 
-    console.log(sessionStorage.getItem("bangazon-token"));
-    console.log(newRecommendationObj);
-
     RecommendedProductManager.post(newRecommendationObj).then(() =>
       props.history.go(-1)
     );
