@@ -6,6 +6,7 @@ import "./ProductDetails.css"
 
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
+    const [initialQuantity, setInitialQuantity] = useState(0)
     const [selectProduct, setSelectProduct] = useState("")
     const [productType, setProductType] = useState("")
     const [select, setSelect] = useState(false)
@@ -23,7 +24,7 @@ const ProductDetail = (props) => {
         setSelect(true);
         setSelectProduct(e.target.value);
         const stateToChange = { ...product };
-        stateToChange["quantity"] = e.target.value;
+        stateToChange["quantity"] = initialQuantity - e.target.value;
         setProduct(stateToChange);
       };
 
@@ -38,6 +39,7 @@ const ProductDetail = (props) => {
                 image: product.image,
                 productTypeId: product.productTypeId
             })
+            setInitialQuantity(product.quantity)
             ProductTypeManager.getAll().then(productTypes => {
                 let filteredProductType = ""
                 productTypes.forEach(productType => {
@@ -51,12 +53,12 @@ const ProductDetail = (props) => {
         
     }, [])
 
-    let i = Number;
-    const quantity = product.quantity
+    let i = 1;
+    const quantity = initialQuantity
     const selectOptions = []
 
     for(i=1; i < quantity+1; i++) {
-        selectOptions.push(<option key={product.id} id="quantity" value={product.quantity}>{i}</option>)
+        selectOptions.push(i)
     }
 
     return (
@@ -78,12 +80,12 @@ const ProductDetail = (props) => {
             <p>Quantity: {product.quantity}</p>
             <select
               id="quantity"
-              value={1 || ""}
               onChange={onSelectHandler}
             >
-                {selectOptions.map(option => {
-                    return <option>{Number(option)}</option>
-                })}
+                <selected></selected>
+                {selectOptions.map(option => (
+                    <option id="quantity" value={option}>{option}</option>
+                ))}
             </select>
             <button type="button" onClick={() => handleOrderAdd()}>Add to Order</button>
         </div>
