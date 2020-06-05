@@ -39,6 +39,7 @@ const NavBar = (props) => {
           {isAuthenticated() ? (
             <>
               {" "}
+              <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
               <Link to="/order">View Cart</Link>
               <a

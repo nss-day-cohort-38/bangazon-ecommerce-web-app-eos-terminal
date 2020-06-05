@@ -41,7 +41,7 @@ const SearchResults = (props) => {
          <picture>
          <img className="searchImage" src={result.image} alt=""/>
         </picture>
-        <strong><li key={result.id} onClick={() => props.history.push(`/products/${result.id}`)}>{result.title}</li></strong>
+        <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
         </>
       ))}
 
@@ -52,7 +52,7 @@ const SearchResults = (props) => {
          <picture>
          <img className="searchImage" src={result.image} alt=""/>
         </picture>
-        <strong><li key={result.id} onClick={() => props.history.push(`/products/${result.id}`)}>{result.title}</li></strong>
+        <li onClick={() => props.history.push(`/products/${result.id}`)} key={result.id} className="detail-link"><strong>{result.title}</strong></li>
         </>
       ))}
     </div>
