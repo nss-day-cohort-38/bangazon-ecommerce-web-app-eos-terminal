@@ -5,6 +5,7 @@ import useSimpleAuth from "../auth/useSimpleAuth";
 
 const NavBar = (props) => {
   const [search, setSearch] = useState({ searchBar: "" });
+  const [editReset, setEditReset] = useState({ isRouting: true });
   const { isAuthenticated, logout } = useSimpleAuth();
 
   const handleFieldChange = (evt) => {
@@ -22,6 +23,13 @@ const NavBar = (props) => {
     });
   };
 
+  const resetEdit = () => {
+    props.history.push({
+      pathname: "/myaccount",
+      state: { editReset: editReset.isRouting },
+    });
+  };
+
   return (
     <>
       <div id="navDiv">
@@ -34,7 +42,13 @@ const NavBar = (props) => {
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
               <Link to="/cart">View Cart</Link>
-              <Link to="/myaccount">My Account</Link>
+              <a
+                onClick={() => {
+                  resetEdit();
+                }}
+              >
+                My Account
+              </a>
               <Link
                 onClick={() => {
                   logout();

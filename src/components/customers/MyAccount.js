@@ -39,12 +39,22 @@ const MyAccount = (props) => {
   };
 
   const toggleEdit = () => {
+    if (props.location.state.editReset == true) {
+      props.location.state.editReset = false;
+      setIsEditing(false);
+    } else {
     setIsEditing(!isEditing);
+    }
   };
 
   useEffect(() => {
-    generateAccount();
-  }, []);
+    if (accountDetails.id == "") {
+      generateAccount();
+    }
+    if (props.location.state.editReset == true) {
+      toggleEdit();
+    }
+  }, [props.location.state.editReset]);
 
   return !isEditing ? (
     <>
@@ -69,7 +79,10 @@ const MyAccount = (props) => {
         <button
           type="button"
           onClick={() => {
-            props.history.push("/paymenttypes");
+            props.history.push({
+                pathname:"/paymenttypes",
+                state: {editReset: true},
+            })
           }}
         >
           Manage Payment Options
