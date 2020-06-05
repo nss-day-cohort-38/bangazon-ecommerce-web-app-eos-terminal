@@ -2,3 +2,8 @@ li:hover {
     text-decoration:underline ;
     cursor: pointer;
 }
+
+.searchImage {
+    height: 75px;
+    width: 75px;
+}
