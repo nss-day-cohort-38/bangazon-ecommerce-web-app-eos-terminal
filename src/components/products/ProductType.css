@@ -4,6 +4,7 @@ h3 {
 
 .detail-link {
     cursor: pointer;
+    width: fit-content;
 }
 
 

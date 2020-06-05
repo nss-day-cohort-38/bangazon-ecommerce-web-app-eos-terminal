@@ -5,6 +5,12 @@ body {
 .content {
   margin-left: 5%;
   margin-right: 5%;
+  margin-bottom: 10px;
+}
+
+.lineBreak {
+  width: 25%;
+  margin-left: 0;
 }
 
 .App {
