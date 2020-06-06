@@ -30,10 +30,20 @@ const Cart = (props) => {
 
   if (order.payment_type === null) {
     return (
+        <>
         <div className="content">
             Welcome to your cart.
             <p>Your cart was opened on {order.created_at.split('T')[0]}</p>
         </div>
+        <div>
+        <button
+        type="button"
+        onClick={() => props.history.push(`/order/${order.id}/edit`)}
+        >
+        Complete Order
+        </button>
+        </div>
+        </>
       ) 
   } else {
     return (

@@ -9,14 +9,30 @@ const OrderList = (props) => {
   // The initial state is an empty array
   //setOrders is used to change the state of orders
   const [orders, setOrders] = useState([]);
+  //state from nav in order to push to myaccount
+  const [editReset, setEditReset] = useState({ isRouting: true });
 
   const getOrders = () => {
     // After the data comes back from the API, we
     //  use the setOrders function to update state
+    //TODO: filter/reduce ordersfromapi into new array of just orders with payment types OR
+    //forEach and create new array and .push each thing that matches criteria, then set created array to = orders
     return OrderManager.getAll().then((ordersFromAPI) => {
-      setOrders(ordersFromAPI);
+      const pastOrders = ordersFromAPI.filter(order => order.payment_type !== null)
+      setOrders(pastOrders)
     });
   };
+
+  //function from nav in order to push to myaccount
+  const resetEdit = () => {
+    props.history.push({
+      pathname: "/myaccount",
+      state: { editReset: editReset.isRouting },
+    });
+  };
+
+
+  let orderCount = 1
 
   useEffect(() => {
     getOrders();
@@ -27,13 +43,13 @@ const OrderList = (props) => {
     <div>    <button
           type="button"
           onClick={() => {
-            props.history.push(`/neworder`);
+            resetEdit();
           }}
-        >Create new order
+        >Back
         </button> </div>
       <div className="container-cards">
         {orders.map((order) => (
-          <OrderCard key={order.id} order={order} {...props} />
+          <OrderCard key={order.id} order={order} orderCount={orderCount++} {...props} />
         ))}
       </div>
     </div>

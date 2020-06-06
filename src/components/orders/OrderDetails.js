@@ -24,7 +24,24 @@ const OrderDetail = props => {
     );
   };
 
-  return (
+  if (order.payment_type !== null) {
+    return (
+      <div className="content">
+      <div className="card">
+        <div className="card-content">
+          <picture></picture>
+          <h3>
+            Order ID: <span style={{ color: "darkslategrey" }}>{props.orderId}</span>
+          </h3>
+          <h3>
+            Created At: <span style={{ color: "darkslategrey" }}>{order.created_at}</span>
+          </h3>
+        </div>
+      </div>
+      </div>
+    )
+  } else {
+    return (
     <div className="content">
     <div className="card">
       <div className="card-content">
@@ -50,6 +67,7 @@ const OrderDetail = props => {
     </div>
     </div>
   );
+  }
 };
 
 export default OrderDetail;

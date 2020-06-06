@@ -71,7 +71,7 @@ const ApplicationViews = (props) => {
       />
       <Route
         exact
-        path="/order"
+        path="/orderhistory"
         render={(props) => {
           return <OrderList {...props} />;
         }}
