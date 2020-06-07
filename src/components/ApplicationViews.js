@@ -1,5 +1,5 @@
 import React from "react";
-import { Route } from "react-router-dom";
+import { Route, Redirect } from "react-router-dom";
 import Login from "./auth/Login";
 import Register from "./auth/Register";
 import OrderList from "./orders/Orders";
@@ -17,29 +17,41 @@ import ProductList from "./products/ProductList";
 import Home from "./home/Home";
 import MyProducts from "./products/MyProducts";
 import Cart from "./orders/Cart";
+import useSimpleAuth from "./auth/useSimpleAuth";
 
 const ApplicationViews = (props) => {
+
+  const { isAuthenticated } = useSimpleAuth();
+
   return (
     <>
       <Route
-        exact
+        exact 
         path="/"
         render={(props) => {
           return <Home {...props} />;
         }}
       />
-      <Route
-        path="/addproduct"
-        render={(props) => {
-          return <ProductForm {...props} />;
-        }}
-      />
-      <Route 
-        path="/myproducts" 
-        render={props => {
+      {isAuthenticated() ? (
+        <Route
+          path="/addproduct"
+          render={(props) => {
+            return <ProductForm {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route 
+          path="/myproducts" 
+          render={props => {
             return <MyProducts {...props}/>
-        }}
-      />
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
       <Route
         path="/products/:productId(\d+)"
         render={(props) => {
@@ -69,65 +81,90 @@ const ApplicationViews = (props) => {
           return <ProductTypeList {...props} />;
         }}
       />
-      <Route
-        exact
-        path="/orderhistory"
-        render={(props) => {
-          return <OrderList {...props} />;
-        }}
-      />
-      <Route
-        exact
-        path="/cart"
-        render={(props) => {
-          return <Cart {...props} />;
-        }}
-      />
+      {isAuthenticated() ? (
+        <Route
+          exact 
+          path="/orderhistory"
+          render={(props) => {
+            return <OrderList {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route
+          exact
+          path="/cart"
+          render={(props) => {
+            return <Cart {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
       <Route
         path="/neworder"
         render={(props) => {
           return <NewOrderForm {...props} />;
         }}
       />
-
-      <Route
-        exact
-        path="/order/:orderId(\d+)"
-        render={(props) => {
-          return (
-            <OrderDetail
-              orderId={parseInt(props.match.params.orderId)}
-              {...props}
-            />
-          );
-        }}
-      />
-
-      <Route
-        path="/order/:orderId(\d+)/edit"
-        render={(props) => {
-          return <CompleteOrderForm {...props} />;
-        }}
-      />
-
-      <Route
-        path="/myaccount"
-        render={(props) => {
-          return <MyAccount {...props} />;
-        }}
-      />
-      <Route
-        path="/paymenttypes"
-        render={(props) => {
-          return <PaymentTypeList {...props} />;
-        }}
-      />
-      <Route
-        path="/paymenttypeform"
-        render={(props) => {
-          return <PaymentTypeForm {...props} />;
-        }}
-      />
+      {isAuthenticated() ? (
+        <Route
+          exact
+          path="/order/:orderId(\d+)"
+          render={(props) => {
+            return (
+              <OrderDetail
+                orderId={parseInt(props.match.params.orderId)}
+                {...props}
+              />
+            );
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route
+          path="/order/:orderId(\d+)/edit"
+          render={(props) => {
+            return <CompleteOrderForm {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route
+          path="/myaccount"
+          render={(props) => {
+            return <MyAccount {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route
+          path="/paymenttypes"
+          render={(props) => {
+            return <PaymentTypeList {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
+      {isAuthenticated() ? (
+        <Route
+          path="/paymenttypeform"
+          render={(props) => {
+            return <PaymentTypeForm {...props} />;
+          }}
+        />
+      ) : (
+        <Redirect to="/login" />
+      )}
       <Route
         path="/login"
         render={(props) => {
