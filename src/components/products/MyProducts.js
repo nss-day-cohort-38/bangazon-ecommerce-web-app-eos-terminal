@@ -32,7 +32,7 @@ const MyProducts = (props) => {
             <h2>My Current Listings</h2>
             <div>
                 {products.map(product => 
-                    <div>
+                    <div key={product.id}>
                     <p key={product.id} className="detail-link" onClick={() => props.history.push(`/products/${parseInt(product.id)}`)}>{product.title}</p>
                     <button onClick={() => { deleteProduct(product.id) }}>Remove Listing</button>
                     <hr className='lineBreak'></hr>
