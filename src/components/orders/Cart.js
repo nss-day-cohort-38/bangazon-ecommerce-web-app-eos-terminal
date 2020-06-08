@@ -1,34 +1,36 @@
 // Cart (current open order)
 import React, { useState, useEffect } from "react";
-import OrderCard from "./OrderCard";
 import OrderManager from "../../modules/OrderManager";
 
 const Cart = (props) => {
 
-  const [order, setOrder] = useState([{ url: "", created_at: "", payment_type: "" }]);
-  const [orders, setOrders] = useState([]);
+  const [order, setOrder] = useState({ url: "", created_at: "", payment_type: "" });
+  const [isLoading, setIsLoading] = useState(false);
 
   const getCurrentOrder = () => {
     return OrderManager.getAll()
         .then((ordersFromAPI) => {
             ordersFromAPI.map(orderobj => 
-                {if(orderobj.payment_type != null) {
-                    console.log(orderobj.payment_type.merchant_name)
-                    console.log(orderobj)
-                }
-                else {
-                    console.log(orderobj.payment_type)
+                {if(orderobj.payment_type === null) {
                     setOrder(orderobj)
                 }})
-            setOrders(ordersFromAPI)
         });
     };
+
+    const handleDelete = () => {
+        setIsLoading(true);
+        OrderManager.delete(order.id).then(() =>
+            props.history.push("/cart"),
+            setIsLoading(false),
+            setOrder({ url: "", created_at: "", payment_type: "" })
+        );
+        };  
 
   useEffect(() => {
     getCurrentOrder()
   }, []);
 
-  if (order.payment_type === null) {
+  if (order.payment_type === null && order) {
     return (
         <>
         <div className="content">
@@ -41,6 +43,9 @@ const Cart = (props) => {
         onClick={() => props.history.push(`/order/${order.id}/edit`)}
         >
         Complete Order
+        </button>
+        <button type="button" disabled={isLoading} onClick={handleDelete}>
+          Cancel Order
         </button>
         </div>
         </>
