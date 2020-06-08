@@ -2,11 +2,19 @@ import React, { useState } from "react";
 import "./Nav.css";
 import { withRouter, Link } from "react-router-dom";
 import useSimpleAuth from "../auth/useSimpleAuth";
+import RecommendProductManager from "../../modules/RecommendedProductManager";
 
 const NavBar = (props) => {
   const [search, setSearch] = useState({ searchBar: "" });
   const [editReset, setEditReset] = useState({ isRouting: true });
   const { isAuthenticated, logout } = useSimpleAuth();
+  const [recommendedProducts, setRecommendedProducts] = useState([]);
+
+  const getRecommendedProducts = () => {
+    return RecommendProductManager.getAll().then((res) => {
+      setRecommendedProducts(res.length);
+    });
+  };
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...search };
@@ -30,6 +38,10 @@ const NavBar = (props) => {
     });
   };
 
+  (() => {
+    return isAuthenticated() ? getRecommendedProducts() : null;
+  })();
+
   return (
     <>
       <div id="navDiv">
@@ -38,10 +50,12 @@ const NavBar = (props) => {
           <Link to="/categories">Product Categories</Link>
           {isAuthenticated() ? (
             <>
-              {" "}
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
               <Link to="/order">View Cart</Link>
+              <Link to="/recommendedproducts">
+                Recommendations({recommendedProducts})
+              </Link>
               <a
                 onClick={() => {
                   resetEdit();
@@ -73,7 +87,6 @@ const NavBar = (props) => {
                 type="text"
                 id="searchBar"
                 placeholder="Search for product/location"
-                // autoFocus=""
               />
             </form>
           </div>
