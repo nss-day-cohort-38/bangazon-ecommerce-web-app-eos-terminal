@@ -1,35 +1,75 @@
 import React, { useState, useEffect } from 'react'
+import {Route} from "react-router-dom";
 import ProductManager from '../../modules/ProductManager';
 import AccountManager from "../../modules/AccountManager";
 import ProductTypeManager from '../../modules/ProductTypeManager';
+import OrderProductManager from '../../modules/OrderProductManager';
+import useSimpleAuth from "../auth/useSimpleAuth";
 import "./ProductDetails.css"
-
 
 const ProductDetail = (props) => {
     const [product, setProduct] = useState({ title: "", price: 0.00, description: "", quantity: 0, location: "", imagePath: "", productTypeId: 0 });
+    const [initialQuantity, setInitialQuantity] = useState(0)
+    const [selectProduct, setSelectProduct] = useState("")
     const [productType, setProductType] = useState("")
+    const [select, setSelect] = useState(false)
     const [newQuantity, setNewQuantity] = useState({ quantity: "", id: props.productId })
     const [user, setUser] = useState({ id: 0 })
     const [isEditing, setIsEditing] = useState(false);
+    const {isAuthenticated} = useSimpleAuth();
+    const [isLoading, setIsLoading] = useState(true);
+    
+    let i = 1;
+    const quantity = initialQuantity
+    const selectOptions = [0]
 
+    for(i=1; i < quantity+1; i++) {
+        selectOptions.push(i)
+    }
+
+    const toggleEdit = () => {
+        setIsEditing(!isEditing);
+    };
+
+    const handleOrderAdd = () => {
+        const newItemToAdd = {
+            product_id: props.productId
+        };
+        if (initialQuantity - product.quantity > 0) {
+            {for( i=0; i < initialQuantity - product.quantity; i++) {
+                OrderProductManager.addOrderProduct(newItemToAdd)
+            }};
+            alert(`${i} item(s) have been added to your cart.`);
+        } else {
+            alert("You must select at least one item to add to your order.")
+        }
+    }
+    
     const handleFieldChange = (evt) => {
         const stateToChange = { ...newQuantity };
         stateToChange[evt.target.id] = evt.target.value;
         setNewQuantity(stateToChange);
     };
 
-    const toggleEdit = () => {
-        setIsEditing(!isEditing);
+    const onSelectHandler = e => {
+        setSelect(true);
+        setSelectProduct(e.target.value);
+        const stateToChange = { ...product };
+        stateToChange["quantity"] = initialQuantity - e.target.value;
+        setProduct(stateToChange);
     };
 
     const updateQuantity = (evt) => {
         evt.preventDefault();
+        if(newQuantity.quantity == "") {
+            ProductManager.updateProductQuantity({quantity: product.quantity, id: props.productId})
+            setIsLoading(true);
+        } else {
         ProductManager.updateProductQuantity(newQuantity).then(() => toggleEdit());
         const stateToChange = { ...product };
         stateToChange["quantity"] = newQuantity.quantity;
         setProduct(stateToChange)
-      };
-
+      }};
 
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
@@ -44,6 +84,7 @@ const ProductDetail = (props) => {
                 image: product.image,
                 productTypeId: product.productTypeId
             })
+            setInitialQuantity(product.quantity)
             ProductTypeManager.getAll().then(productTypes => {
                 let filteredProductType = ""
                 productTypes.forEach(productType => {
@@ -61,10 +102,21 @@ const ProductDetail = (props) => {
                    })
             }
         })
+        setIsLoading(false);
 
     }, [])
+
     return (
-        <div className="content">
+        <>
+      <div className="content">
+      {user.id !== undefined || 0 ? (
+        <button
+          type="button"
+          onClick={() => props.history.push(`/recommendproducts/${product.id}`)}
+        >
+          Recommend To A Friend
+        </button>
+      ) : null}
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
             <h1>Product Detail:</h1>
             <picture>
@@ -79,6 +131,20 @@ const ProductDetail = (props) => {
                     ? <p>Local Delivery Available In: {product.location}</p>
                     : null
             }
+            {isAuthenticated() && product.customer_id !== user.id ? <><p>Quantity: {product.quantity}</p><select
+              id="quantity"
+              onChange={onSelectHandler}>
+                <selected></selected>
+                {selectOptions.map(option => (
+                    <option id="quantity" value={option}>{option}</option>
+                ))}
+            </select>
+            <form onSubmit={updateQuantity}>
+                <button type="submit" disabled={isLoading} onClick={handleOrderAdd}>
+                    Add to Order</button>
+                </form>
+            </> : null}
+            
             {
                 isEditing
                     ? <form onSubmit={updateQuantity}>
@@ -93,18 +159,20 @@ const ProductDetail = (props) => {
                             />
                         <button type="submit">Save</button>
                     </form>
-                    : <><div>Quantity: {product.quantity}
+                        : <>
                     {
                         product.customer_id == user.id
-                        ?  <button type="button" onClick={() => { toggleEdit(); }}>Update</button>
+                        ?  <div>Quantity: {product.quantity}
+                        <button type="button" onClick={() => { toggleEdit(); }}>Update</button>
+                        </div>
                         : null
-
-                    }</div></>
+                    }</>
                    
             }
 
         </div>
+        </>
     )
 }
-export default ProductDetail;
 
+export default ProductDetail;

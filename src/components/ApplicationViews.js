@@ -15,9 +15,11 @@ import ProductForm from "./products/ProductForm";
 import ProductTypeList from "./products/ProductTypeList";
 import ProductList from "./products/ProductList";
 import Home from "./home/Home";
+import RecommendationForm from "./recommendations/RecommendationForm";
 import MyProducts from "./products/MyProducts";
 import Cart from "./orders/Cart";
 import useSimpleAuth from "./auth/useSimpleAuth";
+import RecommendationList from "./recommendations/Recommendations";
 
 const ApplicationViews = (props) => {
 
@@ -181,6 +183,23 @@ const ApplicationViews = (props) => {
         path="/results"
         render={(props) => {
           return <SearchResults {...props} />;
+        }}
+      />
+      <Route
+        path="/recommendproducts/:productId(\d+)"
+        render={(props) => {
+          return (
+            <RecommendationForm
+              productId={parseInt(props.match.params.productId)}
+              {...props}
+            />
+          );
+        }}
+      />
+      <Route
+        path="/recommendedproducts"
+        render={(props) => {
+          return <RecommendationList {...props} />;
         }}
       />
     </>
