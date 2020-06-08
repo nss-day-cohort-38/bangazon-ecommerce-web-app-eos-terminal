@@ -47,14 +47,6 @@ const OrderDetail = props => {
     });
   }, [props.orderId]);
 
-  const handleDelete = () => {
-    //invoke the delete function in OrderManger and re-direct to the order list.
-    setIsLoading(true);
-    OrderManager.delete(props.orderId).then(() =>
-      props.history.push("/order")
-    );
-  };
-
   if (order.payment_type !== null) {
     return (
       <div className="content">

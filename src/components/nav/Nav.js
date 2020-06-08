@@ -52,14 +52,10 @@ const NavBar = (props) => {
             <>
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
-<<<<<<< HEAD
               <Link to="/cart">View Cart</Link>
-=======
-              <Link to="/order">View Cart</Link>
               <Link to="/recommendedproducts">
                 Recommendations({recommendedProducts})
               </Link>
->>>>>>> master
               <a
                 onClick={() => {
                   resetEdit();
