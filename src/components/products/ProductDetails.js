@@ -3,6 +3,7 @@ import ProductManager from '../../modules/ProductManager';
 import AccountManager from "../../modules/AccountManager";
 import ProductTypeManager from '../../modules/ProductTypeManager';
 import OrderProductManager from '../../modules/OrderProductManager';
+import useSimpleAuth from "../auth/useSimpleAuth";
 import "./ProductDetails.css"
 
 const ProductDetail = (props) => {
@@ -14,6 +15,7 @@ const ProductDetail = (props) => {
     const [newQuantity, setNewQuantity] = useState({ quantity: "", id: props.productId })
     const [user, setUser] = useState({ id: 0 })
     const [isEditing, setIsEditing] = useState(false);
+    const {isAuthenticated} = useSimpleAuth();
     
     let i = 1;
     const quantity = initialQuantity
@@ -35,7 +37,8 @@ const ProductDetail = (props) => {
             {for( i=0; i < initialQuantity - product.quantity; i++) {
                 OrderProductManager.addOrderProduct(newItemToAdd)
             }}
-            window.alert(`${i} item's have been added to your cart.`)
+            window.alert(`${i} item(s) have been added to your cart.`)
+            (props.history.push("/categories"))
         } else {
             window.alert("You must select at least one item to add to your order.")
         }
@@ -115,7 +118,7 @@ const ProductDetail = (props) => {
                     ? <p>Local Delivery Available In: {product.location}</p>
                     : null
             }
-            {product.customer_id !== user.id ? <><p>Quantity: {product.quantity}</p><select
+            {isAuthenticated() && product.customer_id !== user.id ? <><p>Quantity: {product.quantity}</p><select
               id="quantity"
               onChange={onSelectHandler}>
                 <selected></selected>
