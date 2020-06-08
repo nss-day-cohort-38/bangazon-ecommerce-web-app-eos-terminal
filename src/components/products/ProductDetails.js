@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import {Route} from "react-router-dom";
 import ProductManager from '../../modules/ProductManager';
 import AccountManager from "../../modules/AccountManager";
 import ProductTypeManager from '../../modules/ProductTypeManager';
@@ -16,6 +17,7 @@ const ProductDetail = (props) => {
     const [user, setUser] = useState({ id: 0 })
     const [isEditing, setIsEditing] = useState(false);
     const {isAuthenticated} = useSimpleAuth();
+    const [isLoading, setIsLoading] = useState(true);
     
     let i = 1;
     const quantity = initialQuantity
@@ -36,14 +38,13 @@ const ProductDetail = (props) => {
         if (initialQuantity - product.quantity > 0) {
             {for( i=0; i < initialQuantity - product.quantity; i++) {
                 OrderProductManager.addOrderProduct(newItemToAdd)
-            }}
-            window.alert(`${i} item(s) have been added to your cart.`)
-            (props.history.push("/categories"))
+            }};
+            alert(`${i} item(s) have been added to your cart.`);
         } else {
-            window.alert("You must select at least one item to add to your order.")
+            alert("You must select at least one item to add to your order.")
         }
     }
-
+    
     const handleFieldChange = (evt) => {
         const stateToChange = { ...newQuantity };
         stateToChange[evt.target.id] = evt.target.value;
@@ -56,12 +57,13 @@ const ProductDetail = (props) => {
         const stateToChange = { ...product };
         stateToChange["quantity"] = initialQuantity - e.target.value;
         setProduct(stateToChange);
-      };
+    };
 
     const updateQuantity = (evt) => {
         evt.preventDefault();
         if(newQuantity.quantity == "") {
             ProductManager.updateProductQuantity({quantity: product.quantity, id: props.productId})
+            setIsLoading(true);
         } else {
         ProductManager.updateProductQuantity(newQuantity).then(() => toggleEdit());
         const stateToChange = { ...product };
@@ -99,6 +101,7 @@ const ProductDetail = (props) => {
                 })   
                })
         })
+        setIsLoading(false);
 
     }, [])
 
@@ -127,7 +130,7 @@ const ProductDetail = (props) => {
                 ))}
             </select>
             <form onSubmit={updateQuantity}>
-                <button type="submit" onClick={handleOrderAdd}>
+                <button type="submit" disabled={isLoading} onClick={handleOrderAdd}>
                     Add to Order</button>
                 </form>
             </> : null}
