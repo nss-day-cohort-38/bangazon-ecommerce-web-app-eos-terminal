@@ -71,14 +71,6 @@ const ProductDetail = (props) => {
         setProduct(stateToChange)
       }};
 
-  const updateQuantity = (evt) => {
-    evt.preventDefault();
-    ProductManager.updateProductQuantity(newQuantity).then(() => toggleEdit());
-    const stateToChange = { ...product };
-    stateToChange["quantity"] = newQuantity.quantity;
-    setProduct(stateToChange);
-  };
-
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
             setProduct({
@@ -113,7 +105,16 @@ const ProductDetail = (props) => {
     }, [])
 
     return (
-        <div className="content">
+        <>
+      <div className="content">
+      {user.id !== undefined || 0 ? (
+        <button
+          type="button"
+          onClick={() => props.history.push(`/recommendproducts/${product.id}`)}
+        >
+          Recommend To A Friend
+        </button>
+      ) : null}
             <button type="button" onClick={() => props.history.push("/categories")}>View All Products</button>
             <h1>Product Detail:</h1>
             <picture>
@@ -168,6 +169,8 @@ const ProductDetail = (props) => {
             }
 
         </div>
+        </>
     )
 }
+
 export default ProductDetail;
