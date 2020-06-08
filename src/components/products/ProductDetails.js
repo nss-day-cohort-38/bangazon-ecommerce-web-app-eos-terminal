@@ -71,6 +71,13 @@ const ProductDetail = (props) => {
         setProduct(stateToChange)
       }};
 
+  const updateQuantity = (evt) => {
+    evt.preventDefault();
+    ProductManager.updateProductQuantity(newQuantity).then(() => toggleEdit());
+    const stateToChange = { ...product };
+    stateToChange["quantity"] = newQuantity.quantity;
+    setProduct(stateToChange);
+  };
 
     useEffect(() => {
         ProductManager.getProductById(props.productId).then(product => {
@@ -164,4 +171,3 @@ const ProductDetail = (props) => {
     )
 }
 export default ProductDetail;
-

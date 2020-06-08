@@ -15,7 +15,9 @@ import ProductForm from "./products/ProductForm";
 import ProductTypeList from "./products/ProductTypeList";
 import ProductList from "./products/ProductList";
 import Home from "./home/Home";
+import RecommendationForm from "./recommendations/RecommendationForm";
 import MyProducts from "./products/MyProducts";
+import RecommendationList from "./recommendations/Recommendations";
 
 const ApplicationViews = (props) => {
   return (
@@ -33,10 +35,10 @@ const ApplicationViews = (props) => {
           return <ProductForm {...props} />;
         }}
       />
-      <Route 
-        path="/myproducts" 
-        render={props => {
-            return <MyProducts {...props}/>
+      <Route
+        path="/myproducts"
+        render={(props) => {
+          return <MyProducts {...props} />;
         }}
       />
       <Route
@@ -137,6 +139,23 @@ const ApplicationViews = (props) => {
         path="/results"
         render={(props) => {
           return <SearchResults {...props} />;
+        }}
+      />
+      <Route
+        path="/recommendproducts/:productId(\d+)"
+        render={(props) => {
+          return (
+            <RecommendationForm
+              productId={parseInt(props.match.params.productId)}
+              {...props}
+            />
+          );
+        }}
+      />
+      <Route
+        path="/recommendedproducts"
+        render={(props) => {
+          return <RecommendationList {...props} />;
         }}
       />
     </>
