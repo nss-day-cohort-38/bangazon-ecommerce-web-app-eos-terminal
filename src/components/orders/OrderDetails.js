@@ -22,14 +22,16 @@ const OrderDetail = props => {
     );
   };
 
-  const handleOPDelete = (product_id, orderProduct_id) => {
+  const handleOPDelete = (product_id, orderProduct_id, quantity) => {
     setIsLoading(true);
     products.map(product => {
-      orderProduct_id = product.id
-      product_id = product.product_id
+      if(parseInt(product.product.url.split('/')[4]) === product_id) {
+        orderProduct_id = product.id
+        quantity = product.product.quantity
+      }
     })
     OrderProductManager.deleteOrderProduct(orderProduct_id)
-      .then(ProductManager.updateProductQuantity({quantity: 1, id: product_id}))
+      .then(ProductManager.updateProductQuantity({quantity: quantity + 1, id: product_id}))
         .then(() =>
           props.history.push("/order"))
   };
@@ -65,7 +67,7 @@ const OrderDetail = props => {
             <button 
             type="button"
             disabled={isLoading}
-            onClick={handleOPDelete}>Remove</button>
+            onClick={() => handleOPDelete(parseInt(product.product.url.split('/')[4]))}>Remove</button>
            </li></>
         )}</div>
         </ul>

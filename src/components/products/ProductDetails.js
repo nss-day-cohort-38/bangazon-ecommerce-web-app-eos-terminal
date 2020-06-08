@@ -17,7 +17,7 @@ const ProductDetail = (props) => {
     
     let i = 1;
     const quantity = initialQuantity
-    const selectOptions = []
+    const selectOptions = [0]
 
     for(i=1; i < quantity+1; i++) {
         selectOptions.push(i)
@@ -31,10 +31,14 @@ const ProductDetail = (props) => {
         const newItemToAdd = {
             product_id: props.productId
         };
-        {for( i=0; i < initialQuantity - product.quantity; i++) {
-            OrderProductManager.addOrderProduct(newItemToAdd)
-        }}
-        window.alert(`${i} item's have been added to your cart.`)
+        if (initialQuantity - product.quantity > 0) {
+            {for( i=0; i < initialQuantity - product.quantity; i++) {
+                OrderProductManager.addOrderProduct(newItemToAdd)
+            }}
+            window.alert(`${i} item's have been added to your cart.`)
+        } else {
+            window.alert("You must select at least one item to add to your order.")
+        }
     }
 
     const handleFieldChange = (evt) => {
