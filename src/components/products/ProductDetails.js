@@ -69,17 +69,21 @@ const ProductDetail = (props) => {
       });
     });
   }, []);
+
   return (
     <div className="content">
       <button type="button" onClick={() => props.history.push("/categories")}>
         View All Products
       </button>
-      <button
-        type="button"
-        onClick={() => props.history.push(`/recommendproducts/${product.id}`)}
-      >
-        Recommend To A Friend
-      </button>
+      {user.id !== undefined || 0 ? (
+        <button
+          type="button"
+          onClick={() => props.history.push(`/recommendproducts/${product.id}`)}
+        >
+          Recommend To A Friend
+        </button>
+      ) : null}
+
       <h1>Product Detail:</h1>
       <picture>
         <img src={product.image} alt="" />

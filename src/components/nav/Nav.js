@@ -11,14 +11,10 @@ const NavBar = (props) => {
   const [recommendedProducts, setRecommendedProducts] = useState([]);
 
   const getRecommendedProducts = () => {
-    // After the data comes back from the API, we
-    //  use the setOrders function to update state
     return RecommendProductManager.getAll().then((res) => {
       setRecommendedProducts(res.length);
     });
   };
-
-  getRecommendedProducts();
 
   const handleFieldChange = (evt) => {
     const stateToChange = { ...search };
@@ -42,6 +38,10 @@ const NavBar = (props) => {
     });
   };
 
+  (() => {
+    return isAuthenticated() ? getRecommendedProducts() : null;
+  })();
+
   return (
     <>
       <div id="navDiv">
@@ -50,7 +50,6 @@ const NavBar = (props) => {
           <Link to="/categories">Product Categories</Link>
           {isAuthenticated() ? (
             <>
-              {" "}
               <Link to="/myproducts">My Products</Link>
               <Link to="/addproduct">Sell a Product</Link>
               <Link to="/order">View Cart</Link>
@@ -88,7 +87,6 @@ const NavBar = (props) => {
                 type="text"
                 id="searchBar"
                 placeholder="Search for product/location"
-                // autoFocus=""
               />
             </form>
           </div>
