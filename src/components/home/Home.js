@@ -46,7 +46,7 @@ const Home = (props) => {
       <h3>Welcome to Bangazon!</h3>
       <h3>Check out our most recent products</h3>
       {
-        token
+        token && userProducts.length > 0
 
           ? <><p className="user-products-header">Stuff You're Selling</p>
             <div className="products">        {userProducts.map((product) => (
@@ -56,9 +56,9 @@ const Home = (props) => {
 
       }
             {
-        token
+        token && userProducts.length > 0
         ? <div>Stuff Others Are Selling</div>
-        : <div>All Products</div>
+        : null
       }
       <div className="products">
       
