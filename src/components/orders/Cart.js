@@ -25,7 +25,7 @@ const Cart = (props) => {
     return OrderProductManager.getOrderProducts()
       .then(orderProductsResp => {
         orderProductsResp.map(product => {
-          if(parseInt(product.order.url.split('/')[4]) === order.id) {
+          if(product.order !== null && parseInt(product.order.url.split('/')[4]) === order.id) {
             productArray.push(product)
           }
         })
