@@ -52,10 +52,10 @@ const OrderDetail = props => {
         <ul>
         <div>
         {products.map(product => 
-          <li key={product.id}>
+          <div key={product.id}>
             <span>Title: {product.product.title}</span>
             <span> -- Price: ${product.product.price}</span>
-          </li>
+          </div>
         )}
         </div>
         </ul>
