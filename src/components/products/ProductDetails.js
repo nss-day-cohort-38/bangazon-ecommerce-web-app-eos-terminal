@@ -94,11 +94,13 @@ const ProductDetail = (props) => {
                 })
                 setProductType(filteredProductType)
             })
-            AccountManager.getAll().then(user => {
-                setUser({
-                    id: user.id
-                })   
-               })
+            if(sessionStorage.getItem("bangazon-token")) {
+                AccountManager.getAll().then(user => {
+                    setUser({
+                        id: user.id
+                    })   
+                   })
+            }
         })
         setIsLoading(false);
 

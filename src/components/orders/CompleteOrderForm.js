@@ -28,7 +28,7 @@ const CompleteOrderForm = props => {
 
     OrderManager.update(editedOrder).then(() =>
     alert("Your order is now complete.")).then(() =>
-      props.history.push("/order")
+      props.history.push("/cart")
     );
   };
 

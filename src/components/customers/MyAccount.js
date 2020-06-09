@@ -92,7 +92,7 @@ const MyAccount = (props) => {
         <button
           type="button"
           onClick={() => {
-            props.history.push("/order");
+            props.history.push("/orderhistory");
           }}
         >
           View Order History

@@ -5,10 +5,9 @@ const OrderCard = (props) => {
   
     <div className="card">
       <div className="card-content">
-        <h3>Created At:</h3>
-        <p>
-            {props.order.created_at}
-        </p>
+        <h3>Order {props.orderCount}</h3>
+        <p>Created On: {props.order.created_at.split("T")[0]}</p>
+        <p>Payment Type: {props.order.payment_type.merchant_name}</p>
         <button
           type="button"
           onClick={() => {

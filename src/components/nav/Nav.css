@@ -59,4 +59,7 @@ nav a:hover {
     .navDiv {
         height: fit-content;
     }  
+    #navDiv {
+        height: fit-content;
+    }
 }
